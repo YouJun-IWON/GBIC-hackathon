@@ -157,19 +157,19 @@ const ERC1155 = (props: { seriesId: any }) => {
     const result = mintData((data = { data }));
     console.log('result', result.data[0]);
     toast.info('IPFS 업로드 준비중');
-    // const objects = [result.data[0], result.data[1], result.data[2], result.data[3], result.data[4]];
-    // const base = 'https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs';
-    // const jsonUris = await storage.uploadBatch(objects);
+    const objects = [result.data[0], result.data[1], result.data[2], result.data[3], result.data[4]];
+    const base = 'https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs';
+    const jsonUris = await storage.uploadBatch(objects);
 
-    // toast.info('IPFS 업로드 완료');
+    toast.info('IPFS 업로드 완료');
 
-    // console.log('jsonUris : ', base.concat(jsonUris[0].slice(6, -2)));
-    // const baseUrl = { baseURI: base.concat(jsonUris[0].slice(6, -2)) };
+    console.log('jsonUris : ', base.concat(jsonUris[0].slice(6, -2)));
+    const baseUrl = { baseURI: base.concat(jsonUris[0].slice(6, -2)) };
 
     const address = {"minterAddress": user.address};
-    // const returnedTarget = Object.assign(baseUrl, result);
-    // const plusAddress = Object.assign(address, returnedTarget)
-    // console.log('returnedTarget', returnedTarget);
+    const returnedTarget = Object.assign(baseUrl, result);
+    const plusAddress = Object.assign(address, returnedTarget)
+    console.log('returnedTarget', plusAddress);
 
     
 
@@ -178,20 +178,20 @@ const ERC1155 = (props: { seriesId: any }) => {
     // const res = await storage?.upload(objects);
     // console.log('res', res);
 
-    // axios
-    //   .post('http://13.232.70.72:80/mint-series', returnedTarget)
-    //   .then((response) => {
-    //     toast.success('ERC1155 NFT Mint 완료');
-    //     // router.push(`/Series/${response.id}`);
-    //   })
-    //   .catch((err) => {
-    //     toast.error(`error: ${err}`);
+    axios
+      .post('http://13.232.70.72:80/mint-series', plusAddress)
+      .then((response: any) => {
+        toast.success('ERC1155 NFT Mint 완료');
+        router.push(`/Series/${response.data.seriesId}`);
+      })
+      .catch((err) => {
+        toast.error(`error: ${err}`);
 
-    //     console.error(err);
-    //   })
-    //   .finally(() => {
-    //     setIsLoading(false);
-    //   });
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
 
     // try {
     //   const response = await fetch('http://13.232.70.72:80/mint-series', {

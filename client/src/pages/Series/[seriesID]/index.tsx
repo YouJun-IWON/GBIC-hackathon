@@ -27,26 +27,44 @@ import 'swiper/css/pagination';
 // import required modules
 import { EffectCube, Pagination } from 'swiper/modules';
 import { seriesMintInfo } from '@/constants/category';
+import axios from 'axios';
 
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//   console.log('getServerSide33', context.params?.seriesID);
-//   const transaction = await fetch(
-//     `http://localhost:3000/api/get-transaction/get-transaction?id=${context.params?.seriesID}`
-//   )
-//     .then((res) => res.json())
-//     .then((data) => {
-//       if (!data.items) {
-//         context.res.writeHead(302, { Location: '/item_not_exist ' });
-//         context.res.end();
-//         return;
-//       }
-//       return data.items;
-//     });
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  console.log('getServerSide33', context.params?.seriesID);
+  let userProfile: any = '';
 
-//   return {
-//     props: { transaction: { ...transaction } },
-//   };
-// }
+  try {
+    // Send GET request using axios
+    const response = await axios.get(
+      `http://13.232.70.72:80/series?id=${context.params?.seriesID}`
+    );
+    console.log(response);
+
+    // Access the response data
+    userProfile = response.data;
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    userProfile = null;
+  }
+
+  // const transaction = await fetch(
+  //   `http://13.232.70.72:80/series?id=${context.params?.seriesID}`
+  // )
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     if (!data.items) {
+  //       context.res.writeHead(302, { Location: '/item_not_exist ' });
+  //       context.res.end();
+  //       return;
+  //     }
+  //     return data.items;
+  //   });
+
+  return {
+    props: { transaction: { ...userProfile } },
+  };
+}
 
 const SeriesID = (props: { transaction: any }) => {
   const { data: session, status } = useSession();
@@ -74,6 +92,8 @@ const SeriesID = (props: { transaction: any }) => {
   // }, [transactionId]);
 
   const transaction = props.transaction;
+
+  console.log('transaction', transaction);
 
   // const application = {
   //   address: '',
@@ -134,11 +154,11 @@ const SeriesID = (props: { transaction: any }) => {
           </section>
           <div className='mt-4 md:mt-0'>
             <h1 className='mb-4 text-6xl tracking-tight font-extrabold text-gray-900 '>
-              {seriesMintInfo.seriesInfo.title}
+              {transaction.seriesInfo.title}
             </h1>
 
             <p className='mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-3xl '>
-              Series {seriesMintInfo.id}
+              Series {transaction.seriesInfo.series / 10}
             </p>
 
             <dl className='flex-col items-center'>
@@ -147,8 +167,8 @@ const SeriesID = (props: { transaction: any }) => {
                   시리즈 유효 기간
                 </dt>
                 <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
-                  {formatTime(seriesMintInfo.seriesInfo.useWhenFrom)} ~{' '}
-                  {formatTime(seriesMintInfo.seriesInfo.useWhenTo)}
+                  {formatTime(transaction.seriesInfo.useWhenFrom)} ~{' '}
+                  {formatTime(transaction.seriesInfo.useWhenTo)}
                 </dd>
               </div>
               <div>
@@ -156,7 +176,7 @@ const SeriesID = (props: { transaction: any }) => {
                   혜택 및 티켓
                 </dt>
                 <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
-                  {seriesMintInfo.seriesInfo.benefit}
+                  {transaction.seriesInfo.benefit}
                 </dd>
               </div>
             </dl>
@@ -167,7 +187,7 @@ const SeriesID = (props: { transaction: any }) => {
                   사용처
                 </dt>
                 <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
-                  {seriesMintInfo.seriesInfo.useWhere}
+                  {transaction.seriesInfo.useWhere}
                 </dd>
               </div>
               <div>
@@ -175,7 +195,7 @@ const SeriesID = (props: { transaction: any }) => {
                   주최 사/인
                 </dt>
                 <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
-                  {seriesMintInfo.seriesInfo.owner}
+                  {transaction.seriesInfo.owner}
                 </dd>
               </div>
             </dl>
@@ -185,16 +205,16 @@ const SeriesID = (props: { transaction: any }) => {
                 Transaction Hash
               </dt>
               <h1 className=' mb-4 w-full font-light text-gray-600 sm:mb-5 '>
-                {seriesMintInfo.transactionHash}
+                {transaction.transactionHash}
               </h1>
             </div>
 
             <dl className='text-center text-gray-600 flex justify-center flex-col bg-green-100 border-5 border-green-300 ring-2 ring-green-500 p-3'>
               <dt className='mb-2 font-semibold  text-gray-900 '>
-                {seriesMintInfo.data[0].name}
+                {transaction.data[0].name}
               </dt>
               <dd className=' font-light text-gray-600  '>
-                {seriesMintInfo.data[0].description}
+                {transaction.data[0].description}
               </dd>
             </dl>
 
@@ -230,9 +250,9 @@ const SeriesID = (props: { transaction: any }) => {
 
       <div className=' px-4 mx-auto max-w-screen-xl '>
         <div className='flex justify-between'>
-          <p className='text-lg'>{seriesMintInfo.count}명 참여 완료</p>
+          <p className='text-lg'>{transaction.count}명 참여 완료</p>
           <p className='text-lg text-foreground/50'>
-            최대 {seriesMintInfo.seriesInfo.quantity}명
+            최대 {transaction.seriesInfo.quantity}명
           </p>
         </div>
         <Progress
@@ -244,8 +264,7 @@ const SeriesID = (props: { transaction: any }) => {
           color='default'
           size='md'
           value={
-            seriesMintInfo.count *
-            (100 / Number(seriesMintInfo.seriesInfo.quantity))
+            transaction.count * (100 / Number(transaction.seriesInfo.quantity))
           }
         />
       </div>
@@ -276,12 +295,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-orange-100 border-5 border-orange-300 ring-2 ring-red-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>{seriesMintInfo.data[1].name}</span>
+              <span>{transaction.data[1].name}</span>
             </h3>
-            <p>{seriesMintInfo.data[1].description}</p>
+            <p>{transaction.data[1].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className='mt-3'>{seriesMintInfo.data[1].attributes[2].value}</p>
+            <p className='mt-3'>{transaction.data[1].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -308,12 +327,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-blue-100 border-5 border-blue-300 ring-2 ring-blue-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>{seriesMintInfo.data[2].name}</span>
+              <span>{transaction.data[2].name}</span>
             </h3>
-            <p>{seriesMintInfo.data[2].description}</p>
+            <p>{transaction.data[2].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className='mt-3'>{seriesMintInfo.data[2].attributes[2].value}</p>
+            <p className='mt-3'>{transaction.data[2].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -340,12 +359,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-teal-100 border-5 border-teal-300 ring-2 ring-teal-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>{seriesMintInfo.data[3].name}</span>
+              <span>{transaction.data[3].name}</span>
             </h3>
-            <p>{seriesMintInfo.data[3].description}</p>
+            <p>{transaction.data[3].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className='mt-3'>{seriesMintInfo.data[3].attributes[2].value}</p>
+            <p className='mt-3'>{transaction.data[3].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -373,12 +392,12 @@ const SeriesID = (props: { transaction: any }) => {
 
           <div className='text-center text-gray-600 flex justify-center flex-col bg-purple-100 border-5 border-purple-300 ring-2 ring-purple-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>{seriesMintInfo.data[4].name}</span>
+              <span>{transaction.data[4].name}</span>
             </h3>
-            <p>{seriesMintInfo.data[4].description}</p>
+            <p>{transaction.data[4].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className='mt-3'>{seriesMintInfo.data[4].attributes[2].value}</p>
+            <p className='mt-3'>{transaction.data[4].attributes[2].value}</p>
             <br />
           </div>
         </div>
@@ -391,25 +410,25 @@ const SeriesID = (props: { transaction: any }) => {
             level={10}
             draggable={true}
             zoomable={true}
-            latitude1={seriesMintInfo.data[1].attributes[0].value}
-            longitude1={seriesMintInfo.data[1].attributes[1].value}
-            latitude2={seriesMintInfo.data[2].attributes[0].value}
-            longitude2={seriesMintInfo.data[2].attributes[1].value}
-            latitude3={seriesMintInfo.data[3].attributes[0].value}
-            longitude3={seriesMintInfo.data[3].attributes[1].value}
-            latitude4={seriesMintInfo.data[4].attributes[0].value}
-            longitude4={seriesMintInfo.data[4].attributes[1].value}
-            lo1={seriesMintInfo.data[1].name}
-            lo2={seriesMintInfo.data[2].name}
-            lo3={seriesMintInfo.data[3].name}
-            lo4={seriesMintInfo.data[4].name}
+            latitude1={transaction.data[1].attributes[0].value}
+            longitude1={transaction.data[1].attributes[1].value}
+            latitude2={transaction.data[2].attributes[0].value}
+            longitude2={transaction.data[2].attributes[1].value}
+            latitude3={transaction.data[3].attributes[0].value}
+            longitude3={transaction.data[3].attributes[1].value}
+            latitude4={transaction.data[4].attributes[0].value}
+            longitude4={transaction.data[4].attributes[1].value}
+            lo1={transaction.data[1].name}
+            lo2={transaction.data[2].name}
+            lo3={transaction.data[3].name}
+            lo4={transaction.data[4].name}
           />
           <div className='mt-4 md:mt-0'>
             <h2 className='mb-4 text-4xl tracking-tight font-extrabold text-gray-900 '>
               Description
             </h2>
             <p className='mb-6 font-light text-gray-500 md:text-lg '>
-              {seriesMintInfo.seriesInfo.description}
+              {transaction.seriesInfo.description}
             </p>
           </div>
         </div>
