@@ -27,7 +27,7 @@ export default function App({
 }: AppProps) {
   return (
     <WagmiConfig config={config}>
-      <SessionProvider session={session} refetchInterval={0}>
+      <SessionProvider session={pageProps.session} refetchInterval={0}>
         <NextUIProvider>
           <Layout>
             <Component {...pageProps} />
