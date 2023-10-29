@@ -7,40 +7,40 @@ import axios from 'axios';
 import { Card, CardBody, CardFooter, Progress } from '@nextui-org/react';
 import Link from 'next/link';
 
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//   const account = context.params?.user as string;
-//   console.log('account', account);
-//   let userProfile;
-//   try {
-//     // Send GET request using axios
-//     const response = await axios.get(
-//       'http://localhost:3000/api/user/get-profile',
-//       {
-//         params: {
-//           address: account,
-//         },
-//       }
-//     );
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const account = context.params?.address as string;
+  console.log('account', account);
+  let userProfile;
+  try {
+    // Send GET request using axios
+    const response = await axios.get(
+      'http://localhost:3000/api/user/get-profile',
+      {
+        params: {
+          address: account,
+        },
+      }
+    );
 
-//     if (!response.data.items.account) {
-//       context.res.writeHead(302, { Location: '/item_not_exist ' });
-//       context.res.end();
-//       return;
-//     }
+    if (!response.data.items.account) {
+      context.res.writeHead(302, { Location: '/item_not_exist ' });
+      context.res.end();
+      return;
+    }
 
-//     // Access the response data
-//     userProfile = response.data;
+    // Access the response data
+    userProfile = response.data;
 
-//     console.log('userProfile', userProfile);
-//   } catch (error) {
-//     console.error('Error fetching user profile:', error);
-//     userProfile = null;
-//   }
+    console.log('userProfile', userProfile);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    userProfile = null;
+  }
 
-//   return {
-//     props: { userProfile: userProfile.items },
-//   };
-// }
+  return {
+    props: { userProfile: userProfile },
+  };
+}
 
 const Profile = (props: { userProfile: any }) => {
   const profile = props.userProfile;

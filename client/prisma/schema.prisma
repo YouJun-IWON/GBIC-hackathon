@@ -18,13 +18,59 @@ model User {
   emailVerified DateTime?
   account       String    @unique
   image         String?
-  series        Int?
+  series        String?
   stamp         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
-
 model Series {
-  id Int @id @default(autoincrement())
-  baseURI String
-  
+  id          Int       @id @default(autoincrement())
+  baseURI     String
+  title       String
+  benefit     String
+  owner       String
+  useWhere    String
+  useWhenFrom DateTime?
+  useWhenTo   DateTime?
+  description String
+  quality     Int
+  applyCount  Int       @default(0)
+
+  name0        String
+  image0       String
+  description0 String
+
+  transactionHash String
+
+  name1        String
+  image1       String
+  description1 String
+  latitude1    String
+  longitude1   String
+  address1     String
+
+  name2        String
+  image2       String
+  description2 String
+  latitude2    String
+  longitude2   String
+  address2     String
+
+  name3        String
+  image3       String
+  description3 String
+  latitude3    String
+  longitude3   String
+  address3     String
+
+  name4        String
+  image4       String
+  description4 String
+  latitude4    String
+  longitude4   String
+  address4     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

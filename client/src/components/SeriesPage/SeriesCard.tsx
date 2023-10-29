@@ -1,4 +1,3 @@
-
 import { ExampleSeries } from '@/constants';
 import Image from 'next/image';
 import {
@@ -10,23 +9,21 @@ import {
   Progress,
   Avatar,
 } from '@nextui-org/react';
-import { useMotionValue, useTransform, motion } from 'framer-motion';
+
 import Link from 'next/link';
 import { HeartIcon } from '../HeartIcon';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const SeriesCard = () => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [30, -30]);
-  const rotateY = useTransform(x, [100, -100], [-30, 30]);
+  const router = useRouter();
 
   const [liked, setLiked] = useState(false);
 
   return (
     <Card
       isPressable
-      onPress={() => console.log('item pressed')}
+      onPress={() => router.push(`/Series/1`)}
       isBlurred
       className='border-none bg-background/60 max-w-[800px] relative'
       shadow='md'
@@ -46,24 +43,23 @@ const SeriesCard = () => {
           <div className='flex flex-col col-span-6 md:col-span-8'>
             <div className='flex justify-between items-start'>
               <div className='flex flex-col gap-0'>
-            <span className='absolute flex min-w-max text-gray font-semibold  -top-[50px] -right-[0px] opacity-20  leading-0'>
-              <span className='text-[130px]'>#01</span>
-            </span>
-              <a
-            href='#'
-            className='justify-between w-fit flex items-center px-1 pr-4 mb-7 text-sm text-gray-700 bg-green-400 rounded-full hover:bg-gray-200 '
-          >
-
-            <Avatar
-              isBordered
-              color='success'
-              src='https://i.pravatar.cc/150?u=a04258114e29026302d'
-              className=' mr-3'
-            />
-            <span className='text-md text-white text-semibold '>
-              GBIC 해커톤
-            </span>
-          </a>
+                <span className='absolute flex min-w-max text-gray font-semibold  -top-[50px] -right-[0px] opacity-20  leading-0'>
+                  <span className='text-[130px]'>#01</span>
+                </span>
+                <a
+                  href='#'
+                  className='justify-between w-fit flex items-center px-1 pr-4 mb-7 text-sm text-gray-700 bg-green-400 rounded-full hover:bg-gray-200 '
+                >
+                  <Avatar
+                    isBordered
+                    color='success'
+                    src='https://i.pravatar.cc/150?u=a04258114e29026302d'
+                    className=' mr-3'
+                  />
+                  <span className='text-md text-white text-semibold '>
+                    GBIC 해커톤
+                  </span>
+                </a>
                 <h1 className='text-xl font-medium mt-2 mb-3'>
                   강화도 맛집 탐방 시리즈~
                 </h1>

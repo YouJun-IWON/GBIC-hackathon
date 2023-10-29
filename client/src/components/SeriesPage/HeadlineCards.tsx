@@ -10,7 +10,7 @@ const HeadlineCards = () => {
    
       <SeriesCard />
    
-        <SeriesCard />
+      <SeriesCard />
     </div>
   );
 };

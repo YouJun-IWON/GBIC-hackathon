@@ -1,4 +1,4 @@
-export const mintData = ({ data }: any) => {
+export const mintData = ({ data, id }: any) => {
   // console.log('image array', data.imageSrc[1])
 
   return {

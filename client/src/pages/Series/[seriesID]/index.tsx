@@ -1,10 +1,3 @@
-import {
-  blockchain_category,
-  goods_field,
-  opportunity_field,
-  skill_field,
-  trasaction_field,
-} from '@/constants/category';
 import { formatTime } from '@/helpers/dayjs';
 // import { Transactions } from '@prisma/client';
 import { ExampleSeries as Transactions } from '@/constants';
@@ -15,18 +8,13 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import React, { Fragment, useEffect, useState } from 'react';
-import GoogleMaps from '@/components/GoogleMap';
+
 import Link from 'next/link';
 
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
-import { motion } from 'framer-motion';
-
 import Image from 'next/image';
-import { Drawer } from 'flowbite';
 
-import getAddress from '@/helpers/getAddress';
 import { Progress, Snippet } from '@nextui-org/react';
 
 import './styles.module.css';
@@ -38,12 +26,12 @@ import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 // import required modules
 import { EffectCube, Pagination } from 'swiper/modules';
-import KakaoMapSeries from '@/components/KakaoMapSeries';
+import { seriesMintInfo } from '@/constants/category';
 
 // export async function getServerSideProps(context: GetServerSidePropsContext) {
-//   console.log('getServerSide33', context.params?.transactionId);
+//   console.log('getServerSide33', context.params?.seriesID);
 //   const transaction = await fetch(
-//     `http://localhost:3000/api/get-transaction/get-transaction?id=${context.params?.transactionId}`
+//     `http://localhost:3000/api/get-transaction/get-transaction?id=${context.params?.seriesID}`
 //   )
 //     .then((res) => res.json())
 //     .then((data) => {
@@ -61,24 +49,19 @@ import KakaoMapSeries from '@/components/KakaoMapSeries';
 // }
 
 const SeriesID = (props: { transaction: any }) => {
-  const KakaoMap = dynamic(() => import('../../../components/KakaoMap'), {
-    ssr: false,
-  });
-  //   const Popup = dynamic(
-  //   () => import('../../../../components/popup/Popup'),
-  //   {
-  //     ssr: false,
-  //   }
-  // );
-
-  //! 신청서 작성시 같이 저장할 데이터이다.
   const { data: session, status } = useSession();
+  const user: any = session?.user!;
+
+  const KakaoMapSeries = dynamic(
+    () => import('../../../components/KakaoMapSeries'),
+    {
+      ssr: false,
+    }
+  );
 
   const [index, setIndex] = useState(0);
 
   const router = useRouter();
-
-  // const queryClient = useQueryClient();
 
   const { transactionId } = router.query;
 
@@ -92,16 +75,32 @@ const SeriesID = (props: { transaction: any }) => {
 
   const transaction = props.transaction;
 
+  // const application = {
+  //   address: '',
+  //   seriesId: `${transaction.id}`,
+  // };
+
+  // const handleClick = async () => {
+  //   try {
+  //     const response = await fetch('http://13.232.70.72/participate-series', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(application),
+  //     });
+  //     const data = await response.json();
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log('Error: ' + error);
+  //   }
+  // };
+
   // const transactionImages = {
   //   imageSrc: String(transaction.imageSrc),
   // };
 
   console.log(transaction);
-
-  //! wishlist
-
-  //! Offcanvas
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -135,11 +134,11 @@ const SeriesID = (props: { transaction: any }) => {
           </section>
           <div className='mt-4 md:mt-0'>
             <h1 className='mb-4 text-6xl tracking-tight font-extrabold text-gray-900 '>
-              강화도 맛집 탐방 시리즈~!~!
+              {seriesMintInfo.seriesInfo.title}
             </h1>
 
             <p className='mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-3xl '>
-              Series 05
+              Series {seriesMintInfo.id}
             </p>
 
             <dl className='flex-col items-center'>
@@ -148,7 +147,8 @@ const SeriesID = (props: { transaction: any }) => {
                   시리즈 유효 기간
                 </dt>
                 <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
-                  2023.10.27 ~ 2023.10.31
+                  {formatTime(seriesMintInfo.seriesInfo.useWhenFrom)} ~{' '}
+                  {formatTime(seriesMintInfo.seriesInfo.useWhenTo)}
                 </dd>
               </div>
               <div>
@@ -156,7 +156,7 @@ const SeriesID = (props: { transaction: any }) => {
                   혜택 및 티켓
                 </dt>
                 <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
-                  지역 문화 상품권 10000원
+                  {seriesMintInfo.seriesInfo.benefit}
                 </dd>
               </div>
             </dl>
@@ -167,35 +167,38 @@ const SeriesID = (props: { transaction: any }) => {
                   사용처
                 </dt>
                 <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
-                  인천 종합 어시장
+                  {seriesMintInfo.seriesInfo.useWhere}
                 </dd>
               </div>
               <div>
                 <dt className='mb-2 font-semibold leading-none text-gray-900 '>
                   주최 사/인
                 </dt>
-                <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>GBIC</dd>
+                <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
+                  {seriesMintInfo.seriesInfo.owner}
+                </dd>
               </div>
             </dl>
-            <dl className='flex-col relative items-center'>
-              <div>
-                <dt className='mb-2 font-semibold leading-none text-gray-900 '>
-                  Stampboard NFT Desc
-                </dt>
-                <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>GBIC</dd>
-              </div>
-              <div>
-                <dt className='mb-2 font-semibold leading-none text-gray-900 '>
-                  Transaction Hash
-                </dt>
-                <h1 className=' mb-4 w-full font-light text-gray-600 sm:mb-5 '></h1>
-              </div>
+
+            <div className=''>
+              <dt className='mb-2 font-semibold text-gray-900 '>
+                Transaction Hash
+              </dt>
+              <h1 className=' mb-4 w-full font-light text-gray-600 sm:mb-5 '>
+                {seriesMintInfo.transactionHash}
+              </h1>
+            </div>
+
+            <dl className='text-center text-gray-600 flex justify-center flex-col bg-green-100 border-5 border-green-300 ring-2 ring-green-500 p-3'>
+              <dt className='mb-2 font-semibold  text-gray-900 '>
+                {seriesMintInfo[0].name}
+              </dt>
+              <dd className=' font-light text-gray-600  '>
+                {seriesMintInfo[0].description}
+              </dd>
             </dl>
 
             <div className='flex-col items-center '>
-              <div className='flex space-x-4'></div>
-
-              <div></div>
               <br />
 
               <button
@@ -206,7 +209,6 @@ const SeriesID = (props: { transaction: any }) => {
                     router.push('/auth/login');
                     return;
                   }
-                  setIsOpen(true);
                 }}
               >
                 <svg
@@ -228,8 +230,10 @@ const SeriesID = (props: { transaction: any }) => {
 
       <div className=' px-4 mx-auto max-w-screen-xl '>
         <div className='flex justify-between'>
-          <p className='text-lg'>43명 참여 완료</p>
-          <p className='text-lg text-foreground/50'>최대 50명</p>
+          <p className='text-lg'>{seriesMintInfo.count}명 참여 완료</p>
+          <p className='text-lg text-foreground/50'>
+            최대 {seriesMintInfo.seriesInfo.quantity}명
+          </p>
         </div>
         <Progress
           aria-label='Music progress'
@@ -239,7 +243,10 @@ const SeriesID = (props: { transaction: any }) => {
           }}
           color='default'
           size='md'
-          value={86}
+          value={
+            seriesMintInfo.count *
+            (100 / Number(seriesMintInfo.seriesInfo.quantity))
+          }
         />
       </div>
 
@@ -269,12 +276,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-orange-100 border-5 border-orange-300 ring-2 ring-red-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>Series1 Stamp1</span>
+              <span>{seriesMintInfo[1].name}</span>
             </h3>
-            <p>첫번째 인천 스탬프 NFT 시리즈의 도장</p>
+            <p>{seriesMintInfo[1].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className=''>인천광역시 강화군 보문사</p>
+            <p className='mt-3'>{seriesMintInfo[1].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -301,12 +308,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-blue-100 border-5 border-blue-300 ring-2 ring-blue-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>Series1 Stamp1</span>
+              <span>{seriesMintInfo[2].name}</span>
             </h3>
-            <p>첫번째 인천 스탬프 NFT 시리즈의 도장</p>
+            <p>{seriesMintInfo[2].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className=''>인천광역시 강화군 보문사</p>
+            <p className='mt-3'>{seriesMintInfo[2].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -333,12 +340,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-teal-100 border-5 border-teal-300 ring-2 ring-teal-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>Series1 Stamp1</span>
+              <span>{seriesMintInfo[3].name}</span>
             </h3>
-            <p>첫번째 인천 스탬프 NFT 시리즈의 도장</p>
+            <p>{seriesMintInfo[3].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className=''>인천광역시 강화군 보문사</p>
+            <p className='mt-3'>{seriesMintInfo[3].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -366,12 +373,12 @@ const SeriesID = (props: { transaction: any }) => {
 
           <div className='text-center text-gray-600 flex justify-center flex-col bg-purple-100 border-5 border-purple-300 ring-2 ring-purple-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>Series1 Stamp1</span>
+              <span>{seriesMintInfo[4].name}</span>
             </h3>
-            <p>첫번째 인천 스탬프 NFT 시리즈의 도장</p>
+            <p>{seriesMintInfo[4].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className=''>인천광역시 강화군 보문사</p>
+            <p className='mt-3'>{seriesMintInfo[4].attributes[2].value}</p>
             <br />
           </div>
         </div>
@@ -384,14 +391,25 @@ const SeriesID = (props: { transaction: any }) => {
             level={10}
             draggable={true}
             zoomable={true}
+            latitude1={seriesMintInfo[1].attributes[0].value}
+            longitude1={seriesMintInfo[1].attributes[1].value}
+            latitude2={seriesMintInfo[2].attributes[0].value}
+            longitude2={seriesMintInfo[2].attributes[1].value}
+            latitude3={seriesMintInfo[3].attributes[0].value}
+            longitude3={seriesMintInfo[3].attributes[1].value}
+            latitude4={seriesMintInfo[4].attributes[0].value}
+            longitude4={seriesMintInfo[4].attributes[1].value}
+            lo1={seriesMintInfo[1].name}
+            lo2={seriesMintInfo[2].name}
+            lo3={seriesMintInfo[3].name}
+            lo4={seriesMintInfo[4].name}
           />
           <div className='mt-4 md:mt-0'>
             <h2 className='mb-4 text-4xl tracking-tight font-extrabold text-gray-900 '>
               Description
             </h2>
             <p className='mb-6 font-light text-gray-500 md:text-lg '>
-              강화도에 있는 다양한 맛집과 문하재를 탐방하면서 스탬프를 찍어오는
-              이벤트
+              {seriesMintInfo.seriesInfo.description}
             </p>
           </div>
         </div>

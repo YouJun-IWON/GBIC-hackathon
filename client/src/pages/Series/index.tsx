@@ -4,7 +4,30 @@ import MainSeries from '@/components/SeriesPage/MainSeries';
 
 import { ExampleSeries } from '@/constants';
 
-const index = () => {
+
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//   console.log('getServerSide33', context.params?.seriesID);
+//   const transaction = await fetch(
+//     `http://localhost:3000/api/get-transaction/get-transaction?id=${context.params?.seriesID}`
+//   )
+//     .then((res) => res.json())
+//     .then((data) => {
+//       if (!data.items) {
+//         context.res.writeHead(302, { Location: '/item_not_exist ' });
+//         context.res.end();
+//         return;
+//       }
+//       return data.items;
+//     });
+
+//   return {
+//     props: { transaction: { ...transaction } },
+//   };
+// }
+
+
+
+const index = (props: { transaction: any }) => {
   return (
     <div className='mb-20'>
  

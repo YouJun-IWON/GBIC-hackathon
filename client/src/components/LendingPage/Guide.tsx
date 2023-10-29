@@ -67,7 +67,9 @@ const Guide = () => {
           <Image src='/NFTImages/stampExample4.png'
           width={300}
           height={300}
-          alt='example'/>
+          alt='example'
+          className='rounded-lg '
+          />
 
           <p className='regular-16 text-gray-20'>남은 목적지 : 보문사</p>
         </div>

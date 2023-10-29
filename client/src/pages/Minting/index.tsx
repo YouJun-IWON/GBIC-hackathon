@@ -19,14 +19,39 @@ import confetti from 'canvas-confetti';
 import { mintData } from '../../helpers/dataschema';
 import { ThirdwebStorage } from '@thirdweb-dev/storage';
 import { useStorage } from '@thirdweb-dev/react';
+import { seriesMintInfo } from '@/constants/category';
 
-//TODO: series 번호 get 요청해서 받아오기
-const ERC1155 = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  // Default this to a country's code to preselect it
 
+
+
+// export async function getServerSideProps() {
+  
+//   const seriesId = await fetch(
+//     `http://localhost:3000/api/get-transaction/get-transaction?id=${context.params?.seriesID}`
+//   )
+//     .then((res) => res.json())
+//     .then((data) => {
+//       if (!data.items) {
+        
+//         return;
+//       }
+//       return data.items;
+//     });
+
+//   return {
+//     props: { seriesId: { ...seriesId } },
+//   };
+// }
+
+
+const ERC1155 = (props: { seriesId: any }) => {
+  // const seriesId = props.seriesId;
+  const seriesId = 4;
   const router = useRouter();
-  // const { data: session, status } = useSession();
+
+  const { data: session, status } = useSession();
+  const user: any = session?.user!;
+  
 
   const [showFrom, setShowFrom] = useState<boolean>(false);
   const [showTo, setShowTo] = useState<boolean>(false);
@@ -70,7 +95,7 @@ const ERC1155 = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      series: 1,
+      series: seriesId,
       title: '',
       benefit: '',
       owner: '',
@@ -125,53 +150,42 @@ const ERC1155 = () => {
     secretKey: process.env.YOUR_SECRET_KEY, // You can get one from dashboard settings
   });
 
-  
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(user.address)
+    setIsLoading(true);
     console.log('data', data);
-    const result =  mintData((data = { data }));
+    const result = mintData((data = { data }));
     console.log('result', result[4]);
+    toast.info('IPFS 업로드 준비중');
+    // const objects = [result[0], result[1], result[2], result[3], result[4]];
+    // const base = 'https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs';
+    // const jsonUris = await storage.uploadBatch(objects);
 
-    const objects =  [result[0], result[1], result[2], result[3], result[4]];
-    const base =  "https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs"
-    const jsonUris = await storage.uploadBatch(objects);
+    // toast.info('IPFS 업로드 완료');
 
-    console.log('jsonUris : ',base.concat(jsonUris[0].slice(6, -2)));
-    const baseUrl =  { baseURI : base.concat(jsonUris[0].slice(6, -2))}
-    const returnedTarget = Object.assign(baseUrl, result);
-    console.log('returnedTarget', returnedTarget)
+    // console.log('jsonUris : ', base.concat(jsonUris[0].slice(6, -2)));
+    // const baseUrl = { baseURI: base.concat(jsonUris[0].slice(6, -2)) };
+
+    const address = {"minterAddress": user.address};
+    // const returnedTarget = Object.assign(baseUrl, result);
+    // const plusAddress = Object.assign(address, returnedTarget)
+    // console.log('returnedTarget', returnedTarget);
+
     
+
+    toast.info('ERC1155 NFT Mint 시작');
+
     // const res = await storage?.upload(objects);
     // console.log('res', res);
 
-    try {
-      const response = await fetch('http://13.232.70.72:80/mint-series', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(returnedTarget),
-      });
-      const data = await response.json();
-      console.log('data', data)
-    } catch (error) {
-      console.log('Error: ' + error);
-    }
-  };
-
-    // setIsLoading(true);
     // axios
     //   .post('http://13.232.70.72:80/mint-series', returnedTarget)
     //   .then((response) => {
-    //     console.log(response)
-    //     // const idWithAuth = `${response.data.items.id}`.concat(
-    //     //   String(session?.user?.address)
-    //     // );
-    //     // router.push(`/User/Transactions/${idWithAuth}`);
-    //     toast.success('Complete transaction registration');
+    //     toast.success('ERC1155 NFT Mint 완료');
+    //     // router.push(`/Series/${response.id}`);
     //   })
     //   .catch((err) => {
-    //     // toast.error(`error: ${err}`);
+    //     toast.error(`error: ${err}`);
 
     //     console.error(err);
     //   })
@@ -179,6 +193,23 @@ const ERC1155 = () => {
     //     setIsLoading(false);
     //   });
 
+    // try {
+    //   const response = await fetch('http://13.232.70.72:80/mint-series', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(returnedTarget),
+    //   });
+    //   const data = await response.json();
+    //   console.log('data', data)
+    // } catch (error) {
+    //   toast.error(`error: ${error}`);
+    //   console.log('Error: ' + error);
+    // } finally {
+    //   setIsLoading(false);
+    // }
+  };
 
   const imageSrc = watch('imageSrc');
 
@@ -212,7 +243,7 @@ const ERC1155 = () => {
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label className='block mb-2 text-xl font-bold text-gray-900 text-center border-t-5 pt-4 border-green-500 border-double'>
-              1. Series 정보 입력
+              1. Series {seriesId} 정보 입력
             </label>
 
             <div className='grid gap-4 sm:grid-cols-2 '>
@@ -431,7 +462,7 @@ const ERC1155 = () => {
             </div>
 
             <label className='block mb-2 mt-5 text-xl font-bold text-gray-900 text-center border-t-3 w-3/4 pt-4 border-green-500 border-dashed mx-auto'>
-              Stamp Board NFT (Series 1 Stamp Board)
+              Stamp Board NFT (Series {seriesId} Stamp Board)
             </label>
 
             <div className='grid  sm:grid-cols-2 '>
@@ -470,7 +501,7 @@ const ERC1155 = () => {
             </div>
 
             <label className='block mb-2 mt-5 text-xl font-bold text-gray-900 text-center border-t-3 w-3/4 pt-4 border-green-500 border-dashed mx-auto'>
-              첫번째 Stamp NFT (Series 1 Stamp 1)
+              첫번째 Stamp NFT (Series {seriesId} Stamp 1)
             </label>
 
             <div className='grid sm:grid-cols-2'>
@@ -527,7 +558,7 @@ const ERC1155 = () => {
             </div>
 
             <label className='block mb-2 mt-5 text-xl font-bold text-gray-900 text-center border-t-3 w-3/4 pt-4 border-green-500 border-dashed mx-auto'>
-              두번째 Stamp NFT (Series 1 Stamp 2)
+              두번째 Stamp NFT (Series {seriesId} Stamp 2)
             </label>
 
             <div className='grid sm:grid-cols-2'>
@@ -584,7 +615,7 @@ const ERC1155 = () => {
             </div>
 
             <label className='block mb-2 mt-5 text-xl font-bold text-gray-900 text-center border-t-3 w-3/4 pt-4 border-green-500 border-dashed mx-auto'>
-              세번째 Stamp NFT (Series 1 Stamp 3)
+              세번째 Stamp NFT (Series {seriesId} Stamp 3)
             </label>
 
             <div className='grid sm:grid-cols-2'>
@@ -641,7 +672,7 @@ const ERC1155 = () => {
             </div>
 
             <label className='block mb-2 mt-5 text-xl font-bold text-gray-900 text-center border-t-3 w-3/4 pt-4 border-green-500 border-dashed mx-auto'>
-              네번째 Stamp NFT (Series 1 Stamp 4)
+              네번째 Stamp NFT (Series {seriesId} Stamp 4)
             </label>
 
             <div className='grid sm:grid-cols-2'>
@@ -737,7 +768,8 @@ const ERC1155 = () => {
               disableRipple
               className="relative  w-full mt-4 bg-green-400 overflow-visible rounded-full hover:-translate-y-1  shadow-xl  after:content-[''] after:absolute after:rounded-full after:inset-0 after:bg-background/40 after:z-[-1] after:transition after:!duration-500 hover:after:scale-150 hover:after:opacity-0"
               size='lg'
-              // onPress={}
+              
+              isLoading={isLoading}
               disabled={isLoading}
             >
               위의 내용으로 Series와 관련 NFT를 민팅하기

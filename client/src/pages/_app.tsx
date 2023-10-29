@@ -9,6 +9,8 @@ import { publicProvider } from 'wagmi/providers/public';
 import 'flowbite';
 import Layout from '@/components/Layout';
 import { SessionProvider } from 'next-auth/react';
+import ToastProvider from '@/components/ToastProvider';
+
 
 const { publicClient, webSocketPublicClient } = configureChains(
   [mainnet],
@@ -32,6 +34,7 @@ export default function App({
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          <ToastProvider/>
         </NextUIProvider>
       </SessionProvider>
     </WagmiConfig>

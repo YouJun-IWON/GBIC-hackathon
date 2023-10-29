@@ -96,6 +96,7 @@ const Hero = () => {
           alt='stampBoardExample'
           width={550}
           height={550}
+          className='rounded-xl shadow-2xl'
         />
         <div className='sm:flex absolute hidden -bottom-20 -left-40 z-20 w-[268px] flex-col gap-8 rounded-3xl bg-green-400 px-7 py-8'>
           <div className='flex flex-col'>
