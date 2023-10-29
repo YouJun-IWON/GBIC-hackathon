@@ -3,10 +3,10 @@ import { MoralisNextApi } from '@moralisweb3/next';
 export default MoralisNextApi({
   apiKey: process.env.MORALIS_API_KEY!,
   authentication: {
-    domain: process.env.NEXTAUTH_URL
-      ? new URL(process.env.NEXTAUTH_URL).host
+    domain: 'https://gbic-hackathon-incheon.vercel.app/'
+      ? new URL('https://gbic-hackathon-incheon.vercel.app/').host
       : '',
-    uri: process.env.NEXTAUTH_URL!,
+    uri: 'https://gbic-hackathon-incheon.vercel.app/'!,
     timeout: 120,
   },
 });
