@@ -37,7 +37,7 @@
     "swiper": "^10.3.1",
     "tailwind-datepicker-react": "^1.4.3",
     "use-places-autocomplete": "^4.0.1",
-    "viem": "^1.17.1",
+    "viem": "^1.18.0",
     "wagmi": "^1.4.5"
   },
   "devDependencies": {
