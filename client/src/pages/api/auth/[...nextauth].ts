@@ -46,10 +46,10 @@ export const authOptions: NextAuthOptions = {
               account: token.user.address,
             },
           });
-          return { ...token, ...user, ...profile };
+          return { ...token, ...user, profile : {...profile} };
         }
 
-        return { ...token, ...user, ...profile };
+        return { ...token, ...user, profile : {...profile} };
       }
       return { ...token, ...user };
     },
