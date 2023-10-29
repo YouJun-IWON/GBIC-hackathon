@@ -144,24 +144,25 @@ const ERC1155 = () => {
     // const res = await storage?.upload(objects);
     // console.log('res', res);
 
-    // setIsLoading(true);
-    // axios
-    //   .post('/api/add-transaction/polygon_ERC1155', data)
-    //   .then((response) => {
-    //     const idWithAuth = `${response.data.items.id}`.concat(
-    //       String(session?.user?.address)
-    //     );
-    //     router.push(`/User/Transactions/${idWithAuth}`);
-    //     toast.success('Complete transaction registration');
-    //   })
-    //   .catch((err) => {
-    //     toast.error(`error: ${err}`);
+    setIsLoading(true);
+    axios
+      .post('http://13.232.70.72:80/mint-series', returnedTarget)
+      .then((response) => {
+        console.log(response)
+        // const idWithAuth = `${response.data.items.id}`.concat(
+        //   String(session?.user?.address)
+        // );
+        // router.push(`/User/Transactions/${idWithAuth}`);
+        toast.success('Complete transaction registration');
+      })
+      .catch((err) => {
+        // toast.error(`error: ${err}`);
 
-    //     console.error(err);
-    //   })
-    //   .finally(() => {
-    //     setIsLoading(false);
-    //   });
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const imageSrc = watch('imageSrc');
