@@ -20,35 +20,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, trigger, session }: any) {
       token.user = user;
 
-      if (trigger === 'update') {
-        return { ...token, ...session.user };
-      }
-
-      if (user) {
-        const profile = await prisma.user.findUnique({
-          where: {
-            account: token.user.address,
-          },
-        });
-
-        if (!profile) {
-          // If the user doesn't exist, create a new entry
-          await prisma.user.create({
-            data: {
-              account: token.user.address,
-            },
-          });
-
-          const profile = await prisma.user.findUnique({
-            where: {
-              account: token.user.address,
-            },
-          });
-          return { ...token, ...user, ...profile };
-        }
-
-        return { ...token, ...user, ...profile };
-      }
+      
       return { ...token, ...user };
     },
     async session({ session, token }: any) {
@@ -59,3 +31,34 @@ export const authOptions: NextAuthOptions = {
 };
 
 export default NextAuth(authOptions);
+
+
+// if (trigger === 'update') {
+//   return { ...token, ...session.user };
+// }
+
+// if (user) {
+//   const profile = await prisma.user.findUnique({
+//     where: {
+//       account: token.user.address,
+//     },
+//   });
+
+//   if (!profile) {
+//     // If the user doesn't exist, create a new entry
+//     await prisma.user.create({
+//       data: {
+//         account: token.user.address,
+//       },
+//     });
+
+//     const profile = await prisma.user.findUnique({
+//       where: {
+//         account: token.user.address,
+//       },
+//     });
+//     return { ...token, ...user, ...profile };
+//   }
+
+//   return { ...token, ...user, ...profile };
+// }
