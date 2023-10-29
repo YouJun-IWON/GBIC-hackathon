@@ -50,7 +50,10 @@ export const authOptions: NextAuthOptions = {
       return { ...token, ...user };
     },
     async session({ session, token, profile }: any) {
-      (session as { user: unknown }).user = { ...token.user, ...profile };
+      (session as { user: unknown }).user = {
+        ...token.user,
+        profile: { ...profile },
+      };
       return session;
     },
   },
