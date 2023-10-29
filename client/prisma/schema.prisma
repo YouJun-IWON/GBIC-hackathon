@@ -26,5 +26,8 @@ model User {
 
 model Series {
   id Int @id @default(autoincrement())
+  baseURI String
+  series Int @default(1)
   
+
 }
