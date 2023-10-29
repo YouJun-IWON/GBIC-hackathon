@@ -191,10 +191,10 @@ const SeriesID = (props: { transaction: any }) => {
 
             <dl className='text-center text-gray-600 flex justify-center flex-col bg-green-100 border-5 border-green-300 ring-2 ring-green-500 p-3'>
               <dt className='mb-2 font-semibold  text-gray-900 '>
-                {seriesMintInfo[0].name}
+                {seriesMintInfo.data[0].name}
               </dt>
               <dd className=' font-light text-gray-600  '>
-                {seriesMintInfo[0].description}
+                {seriesMintInfo.data[0].description}
               </dd>
             </dl>
 
@@ -202,7 +202,7 @@ const SeriesID = (props: { transaction: any }) => {
               <br />
 
               <button
-                className='inline-flex text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2 mb-2'
+                className='inline-flex text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-xl shadow-green-500/50 font-medium rounded-lg text-lg px-5 py-3 text-center mr-2 mb-2'
                 onClick={() => {
                   if (session === null) {
                     alert('Login first');
@@ -212,7 +212,7 @@ const SeriesID = (props: { transaction: any }) => {
                 }}
               >
                 <svg
-                  className='mr-2 w-5 h-5 text-white-800 '
+                  className='mr-2 w-6 h-6 text-white-800 '
                   aria-hidden='true'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='currentColor'
@@ -276,12 +276,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-orange-100 border-5 border-orange-300 ring-2 ring-red-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>{seriesMintInfo[1].name}</span>
+              <span>{seriesMintInfo.data[1].name}</span>
             </h3>
-            <p>{seriesMintInfo[1].description}</p>
+            <p>{seriesMintInfo.data[1].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className='mt-3'>{seriesMintInfo[1].attributes[2].value}</p>
+            <p className='mt-3'>{seriesMintInfo.data[1].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -308,12 +308,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-blue-100 border-5 border-blue-300 ring-2 ring-blue-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>{seriesMintInfo[2].name}</span>
+              <span>{seriesMintInfo.data[2].name}</span>
             </h3>
-            <p>{seriesMintInfo[2].description}</p>
+            <p>{seriesMintInfo.data[2].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className='mt-3'>{seriesMintInfo[2].attributes[2].value}</p>
+            <p className='mt-3'>{seriesMintInfo.data[2].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -340,12 +340,12 @@ const SeriesID = (props: { transaction: any }) => {
           </Swiper>
           <div className='text-center text-gray-600 flex justify-center flex-col bg-teal-100 border-5 border-teal-300 ring-2 ring-teal-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>{seriesMintInfo[3].name}</span>
+              <span>{seriesMintInfo.data[3].name}</span>
             </h3>
-            <p>{seriesMintInfo[3].description}</p>
+            <p>{seriesMintInfo.data[3].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className='mt-3'>{seriesMintInfo[3].attributes[2].value}</p>
+            <p className='mt-3'>{seriesMintInfo.data[3].attributes[2].value}</p>
             <br />
           </div>
           <Swiper
@@ -373,12 +373,12 @@ const SeriesID = (props: { transaction: any }) => {
 
           <div className='text-center text-gray-600 flex justify-center flex-col bg-purple-100 border-5 border-purple-300 ring-2 ring-purple-500 p-3'>
             <h3 className='mb-1  text-xl font-semibold tracking-tight text-gray-900 '>
-              <span>{seriesMintInfo[4].name}</span>
+              <span>{seriesMintInfo.data[4].name}</span>
             </h3>
-            <p>{seriesMintInfo[4].description}</p>
+            <p>{seriesMintInfo.data[4].description}</p>
             <br />
             <p className='text-black text-xl font-bold'>위치</p>
-            <p className='mt-3'>{seriesMintInfo[4].attributes[2].value}</p>
+            <p className='mt-3'>{seriesMintInfo.data[4].attributes[2].value}</p>
             <br />
           </div>
         </div>
@@ -391,18 +391,18 @@ const SeriesID = (props: { transaction: any }) => {
             level={10}
             draggable={true}
             zoomable={true}
-            latitude1={seriesMintInfo[1].attributes[0].value}
-            longitude1={seriesMintInfo[1].attributes[1].value}
-            latitude2={seriesMintInfo[2].attributes[0].value}
-            longitude2={seriesMintInfo[2].attributes[1].value}
-            latitude3={seriesMintInfo[3].attributes[0].value}
-            longitude3={seriesMintInfo[3].attributes[1].value}
-            latitude4={seriesMintInfo[4].attributes[0].value}
-            longitude4={seriesMintInfo[4].attributes[1].value}
-            lo1={seriesMintInfo[1].name}
-            lo2={seriesMintInfo[2].name}
-            lo3={seriesMintInfo[3].name}
-            lo4={seriesMintInfo[4].name}
+            latitude1={seriesMintInfo.data[1].attributes[0].value}
+            longitude1={seriesMintInfo.data[1].attributes[1].value}
+            latitude2={seriesMintInfo.data[2].attributes[0].value}
+            longitude2={seriesMintInfo.data[2].attributes[1].value}
+            latitude3={seriesMintInfo.data[3].attributes[0].value}
+            longitude3={seriesMintInfo.data[3].attributes[1].value}
+            latitude4={seriesMintInfo.data[4].attributes[0].value}
+            longitude4={seriesMintInfo.data[4].attributes[1].value}
+            lo1={seriesMintInfo.data[1].name}
+            lo2={seriesMintInfo.data[2].name}
+            lo3={seriesMintInfo.data[3].name}
+            lo4={seriesMintInfo.data[4].name}
           />
           <div className='mt-4 md:mt-0'>
             <h2 className='mb-4 text-4xl tracking-tight font-extrabold text-gray-900 '>

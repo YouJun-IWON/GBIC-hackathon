@@ -155,9 +155,9 @@ const ERC1155 = (props: { seriesId: any }) => {
     setIsLoading(true);
     console.log('data', data);
     const result = mintData((data = { data }));
-    console.log('result', result[4]);
+    console.log('result', result.data[0]);
     toast.info('IPFS 업로드 준비중');
-    // const objects = [result[0], result[1], result[2], result[3], result[4]];
+    // const objects = [result.data[0], result.data[1], result.data[2], result.data[3], result.data[4]];
     // const base = 'https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs';
     // const jsonUris = await storage.uploadBatch(objects);
 

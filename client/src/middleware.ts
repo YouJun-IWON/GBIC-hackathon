@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
   console.log('session' + JSON.stringify(session));
 
   const pathname = req.nextUrl.pathname;
-
+  // TODO: 여기서 관리자 설정하자 
   // Only logged in users can access
   if (pathname.startsWith('/MyNFT') && !session) {
     return NextResponse.redirect(new URL('/auth/login', req.url));

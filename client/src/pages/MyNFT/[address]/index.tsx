@@ -7,40 +7,40 @@ import axios from 'axios';
 import { Card, CardBody, CardFooter, Progress } from '@nextui-org/react';
 import Link from 'next/link';
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const account = context.params?.address as string;
-  console.log('account', account);
-  let userProfile;
-  try {
-    // Send GET request using axios
-    const response = await axios.get(
-      'http://localhost:3000/api/user/get-profile',
-      {
-        params: {
-          address: account,
-        },
-      }
-    );
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//   const account = context.params?.address as string;
+//   console.log('account', account);
+//   let userProfile;
+//   try {
+//     // Send GET request using axios
+//     const response = await axios.get(
+//       'http://localhost:3000/api/user/get-profile',
+//       {
+//         params: {
+//           address: account,
+//         },
+//       }
+//     );
 
-    if (!response.data.items.account) {
-      context.res.writeHead(302, { Location: '/item_not_exist ' });
-      context.res.end();
-      return;
-    }
+//     if (!response.data.items.account) {
+//       context.res.writeHead(302, { Location: '/item_not_exist ' });
+//       context.res.end();
+//       return;
+//     }
 
-    // Access the response data
-    userProfile = response.data;
+//     // Access the response data
+//     userProfile = response.data;
 
-    console.log('userProfile', userProfile);
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    userProfile = null;
-  }
+//     console.log('userProfile', userProfile);
+//   } catch (error) {
+//     console.error('Error fetching user profile:', error);
+//     userProfile = null;
+//   }
 
-  return {
-    props: { userProfile: userProfile },
-  };
-}
+//   return {
+//     props: { userProfile: userProfile },
+//   };
+// }
 
 const Profile = (props: { userProfile: any }) => {
   const profile = props.userProfile;
@@ -149,7 +149,6 @@ const Profile = (props: { userProfile: any }) => {
                     shadow='lg'
                     isPressable
                     onPress={() => console.log('item pressed')}
-                    
                   >
                     <CardBody className='overflow-visible p-0'>
                       <Image
@@ -164,20 +163,19 @@ const Profile = (props: { userProfile: any }) => {
                       <div className=' px-4 mx-auto w-full '>
                         <div className='flex justify-between'>
                           <p className='text-lg'>Series 1</p>
-                          <p className='text-lg '>
-                            100%
-                          </p>
+                          <p className='text-lg '>100%</p>
                         </div>
                         <Progress
                           aria-label='Music progress'
                           classNames={{
                             base: 'max-w-md',
                             track: 'drop-shadow-md border border-default',
-                            indicator: 'bg-gradient-to-r from-blue-500 to-green-500',
-                            label: 'tracking-wider font-medium text-default-600',
+                            indicator:
+                              'bg-gradient-to-r from-blue-500 to-green-500',
+                            label:
+                              'tracking-wider font-medium text-default-600',
                             value: 'text-green-50',
                           }}
-                          
                           color='default'
                           size='md'
                           value={100}

@@ -120,6 +120,7 @@ export default function App() {
             color={`${
               pathName === NAV_LINKS[3].href ? 'primary' : 'foreground'
             }`}
+         
             href={`/MyNFT/${session?.user && (user.address)}`}
           >
             {NAV_LINKS[3].label}

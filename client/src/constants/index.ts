@@ -52,9 +52,9 @@ export const FOOTER_LINKS = [
   {
     title: 'Learn More',
     links: [
-      'About NFT',
-      'Press Releases',
-      'Environment',
+      'About dNFT',
+      'ERC 1155',
+      'IPFS',
       'Jobs',
       'Privacy Policy',
       'Contact Us',
@@ -62,7 +62,7 @@ export const FOOTER_LINKS = [
   },
   {
     title: 'Our Community',
-    links: ['Blockchain at Yonsei', 'GBIC', 'DNFT'],
+    links: ['Blockchain at Yonsei', 'GBIC', 'Polygon'],
   },
 ];
 
