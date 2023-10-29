@@ -22,3 +22,9 @@ model User {
   series        Int?
   stamp         String?
 }
+
+
+model Series {
+  id Int @id @default(autoincrement())
+  
+}
