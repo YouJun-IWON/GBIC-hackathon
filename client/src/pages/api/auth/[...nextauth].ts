@@ -42,18 +42,16 @@ export const authOptions: NextAuthOptions = {
               account: token.user.address,
             },
           });
-          return { ...token, ...user, profile: { ...profile } };
+          token.user = { ...token, ...user, profile: { ...profile } };
+          return token;
         }
-
-        return { ...token, ...user, profile: { ...profile } };
+        token.user = { ...token, ...user, profile: { ...profile } };
+        return token;
       }
-      return { ...token, ...user };
+      return token;
     },
-    async session({ session, token, profile }: any) {
-      (session as { user: unknown }).user = {
-        ...token.user,
-        profile: { ...profile },
-      };
+    async session({ session, token }: any) {
+      (session as { user: unknown }).user = token.user;
       return session;
     },
   },
