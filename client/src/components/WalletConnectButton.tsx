@@ -32,7 +32,7 @@ const WalletConnectButton = () => {
     const { account, chain } = await connectAsync({
       connector: new WalletConnectConnector({
         options: {
-          projectId: '1186a3265ee6207255fd4ef7ecfd2868',
+          projectId: process.env.NEXT_PUBLIC_PROJECTID,
           showQrModal: true,
         },
       }),
