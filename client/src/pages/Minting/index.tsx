@@ -129,41 +129,56 @@ const ERC1155 = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log('data', data);
-    const result = mintData((data = { data }));
+    const result =  mintData((data = { data }));
     console.log('result', result[4]);
 
-    const objects = [result[0], result[1], result[2], result[3], result[4]];
-    const base = "https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs"
+    const objects =  [result[0], result[1], result[2], result[3], result[4]];
+    const base =  "https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs"
     const jsonUris = await storage.uploadBatch(objects);
 
     console.log('jsonUris : ',base.concat(jsonUris[0].slice(6, -2)));
-    const baseUrl = { baseURI : base.concat(jsonUris[0].slice(6, -2))}
+    const baseUrl =  { baseURI : base.concat(jsonUris[0].slice(6, -2))}
     const returnedTarget = Object.assign(baseUrl, result);
     console.log('returnedTarget', returnedTarget)
     
     // const res = await storage?.upload(objects);
     // console.log('res', res);
 
-    setIsLoading(true);
-    axios
-      .post('http://13.232.70.72:80/mint-series', returnedTarget)
-      .then((response) => {
-        console.log(response)
-        // const idWithAuth = `${response.data.items.id}`.concat(
-        //   String(session?.user?.address)
-        // );
-        // router.push(`/User/Transactions/${idWithAuth}`);
-        toast.success('Complete transaction registration');
-      })
-      .catch((err) => {
-        // toast.error(`error: ${err}`);
-
-        console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
+    try {
+      const response = await fetch('http://13.232.70.72:80/mint-series', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(returnedTarget),
       });
+      const data = await response.json();
+      console.log('data', data)
+    } catch (error) {
+      console.log('Error: ' + error);
+    }
   };
+
+    // setIsLoading(true);
+    // axios
+    //   .post('http://13.232.70.72:80/mint-series', returnedTarget)
+    //   .then((response) => {
+    //     console.log(response)
+    //     // const idWithAuth = `${response.data.items.id}`.concat(
+    //     //   String(session?.user?.address)
+    //     // );
+    //     // router.push(`/User/Transactions/${idWithAuth}`);
+    //     toast.success('Complete transaction registration');
+    //   })
+    //   .catch((err) => {
+    //     // toast.error(`error: ${err}`);
+
+    //     console.error(err);
+    //   })
+    //   .finally(() => {
+    //     setIsLoading(false);
+    //   });
+
 
   const imageSrc = watch('imageSrc');
 

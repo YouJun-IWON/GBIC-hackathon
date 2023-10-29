@@ -38,3 +38,4 @@
 // // export { default } from 'next-auth/middleware';
 
 // // export const config = { matcher: ['/creator/:path*', '/user/:path*'] };
+Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON
