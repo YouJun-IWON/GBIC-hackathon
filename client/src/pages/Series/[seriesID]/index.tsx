@@ -41,7 +41,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
     // Send GET request using axios
     const response = await axios.get(
-      `http://13.232.70.72:80/series?id=${seriesID * 10}`
+      `http://13.232.70.72:80/series?id=${seriesID}`
     );
     console.log('resdewdeponse', response.data);
 

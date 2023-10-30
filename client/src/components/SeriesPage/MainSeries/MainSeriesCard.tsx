@@ -86,7 +86,7 @@ const MainSeriesCard = ({item}: any) => {
           </blockquote>
 
           <Link
-          href={`/Series/${item?.seriesInfo.series / 10}`}
+          href={`/Series/${item?.seriesInfo.series}`}
           className='mt-5 relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-green-400 border-2 border-green-400 rounded-full hover:text-white group hover:bg-gray-50'
         >
           <span className='absolute left-0 block w-full h-0 transition-all bg-green-400 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease'></span>
