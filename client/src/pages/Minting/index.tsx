@@ -21,37 +21,38 @@ import { ThirdwebStorage } from '@thirdweb-dev/storage';
 import { useStorage } from '@thirdweb-dev/react';
 import { seriesMintInfo } from '@/constants/category';
 
+export async function getServerSideProps() {
+  let seriesId;
 
+  try {
+    // Send GET request using axios
+    const response = await axios.get(`http://13.232.70.72:80/series/last`);
+    console.log('resdewdeponse', response.data);
 
+    // Access the response data
+    seriesId = response.data.Id;
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    seriesId = null;
+  }
 
-// export async function getServerSideProps() {
-  
-//   const seriesId = await fetch(
-//     `http://localhost:3000/api/get-transaction/get-transaction?id=${context.params?.seriesID}`
-//   )
-//     .then((res) => res.json())
-//     .then((data) => {
-//       if (!data.items) {
-        
-//         return;
-//       }
-//       return data.items;
-//     });
-
-//   return {
-//     props: { seriesId: { ...seriesId } },
-//   };
-// }
-
+  return {
+    props: { seriesId: { ...seriesId } },
+  };
+}
 
 const ERC1155 = (props: { seriesId: any }) => {
-  // const seriesId = props.seriesId;
-  const seriesId = 4;
+  const seriesid = props.seriesId;
+
+  const seriesId = seriesid ? seriesid / 10 : 1;
+
+  console.log('seriesId', seriesId);
+
   const router = useRouter();
 
   const { data: session, status } = useSession();
   const user: any = session?.user!;
-  
 
   const [showFrom, setShowFrom] = useState<boolean>(false);
   const [showTo, setShowTo] = useState<boolean>(false);
@@ -79,8 +80,6 @@ const ERC1155 = (props: { seriesId: any }) => {
       selected: 'bg-green-500',
     },
   };
-
-
 
   const {
     register,
@@ -147,13 +146,19 @@ const ERC1155 = (props: { seriesId: any }) => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(user.address)
+    console.log(user.address);
     setIsLoading(true);
     console.log('data', data);
     const result = mintData((data = { data }));
     console.log('result', result.data[0]);
     toast.info('IPFS 업로드 준비중');
-    const objects = [result.data[0], result.data[1], result.data[2], result.data[3], result.data[4]];
+    const objects = [
+      result.data[0],
+      result.data[1],
+      result.data[2],
+      result.data[3],
+      result.data[4],
+    ];
     const base = 'https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs';
     const jsonUris = await storage.uploadBatch(objects);
 
@@ -162,12 +167,10 @@ const ERC1155 = (props: { seriesId: any }) => {
     console.log('jsonUris : ', base.concat(jsonUris[0].slice(6, -2)));
     const baseUrl = { baseURI: base.concat(jsonUris[0].slice(6, -2)) };
 
-    const address = {"minterAddress": user.address};
+    const address = { minterAddress: user.address };
     const returnedTarget = Object.assign(baseUrl, result);
-    const plusAddress = Object.assign(address, returnedTarget)
+    const plusAddress = Object.assign(address, returnedTarget);
     console.log('returnedTarget', plusAddress);
-
-    
 
     toast.info('ERC1155 NFT Mint 시작');
 
@@ -764,7 +767,6 @@ const ERC1155 = (props: { seriesId: any }) => {
               disableRipple
               className="relative  w-full mt-4 bg-green-400 overflow-visible rounded-full hover:-translate-y-1  shadow-xl  after:content-[''] after:absolute after:rounded-full after:inset-0 after:bg-background/40 after:z-[-1] after:transition after:!duration-500 hover:after:scale-150 hover:after:opacity-0"
               size='lg'
-              
               isLoading={isLoading}
               disabled={isLoading}
             >

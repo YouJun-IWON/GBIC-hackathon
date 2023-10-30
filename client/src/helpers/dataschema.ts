@@ -3,7 +3,7 @@ export const mintData = ({ data, id }: any) => {
 
   return {
     seriesInfo: {
-      series: data.series,
+      series: Number(data.series) * 10,
       title: data.title.toString(),
       benefit: data.benefit.toString(),
       owner: data.owner.toString(),
