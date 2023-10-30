@@ -177,39 +177,39 @@ const ERC1155 = (props: { seriesId: any }) => {
     // const res = await storage?.upload(objects);
     // console.log('res', res);
 
-    // axios
-    //   .post('http://13.232.70.72:80/mint-series', plusAddress)
-    //   .then((response: any) => {
-    //     toast.success('ERC1155 NFT Mint 완료');
-    //     router.push(`/Series/${response.data.seriesId}`);
-    //   })
-    //   .catch((err) => {
-    //     toast.error(`error: ${err}`);
+    axios
+      .post('http://13.232.70.72:80/mint-series', plusAddress)
+      .then((response: any) => {
+        toast.success('ERC1155 NFT Mint 완료');
+        router.push(`/Series/${response.data.seriesId}`);
+      })
+      .catch((err) => {
+        toast.error(`error: ${err}`);
 
-    //     console.error(err);
-    //   })
-    //   .finally(() => {
-    //     setIsLoading(false);
-    //   });
-
-    try {
-      const response = await fetch('http://13.232.70.72:80/mint-series', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(plusAddress),
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-      const data = await response.json();
-      toast.success('ERC1155 NFT Mint 완료');
-      router.push(`/Series/${data.seriesId}`);
-      console.log('data', data);
-    } catch (error) {
-      toast.error(`error: ${error}`);
-      console.log('Error: ' + error);
-    } finally {
-      setIsLoading(false);
-    }
+
+    // try {
+    //   const response = await fetch('http://13.232.70.72:80/mint-series', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(plusAddress),
+    //   });
+    //   const data = await response.json();
+    //   toast.success('ERC1155 NFT Mint 완료');
+    //   router.push(`/Series/${data.seriesId}`);
+    //   console.log('data', data);
+    // } catch (error) {
+    //   toast.error(`error: ${error}`);
+    //   console.log('Error: ' + error);
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const imageSrc = watch('imageSrc');
