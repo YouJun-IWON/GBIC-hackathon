@@ -15,7 +15,18 @@ import { HeartIcon } from '../HeartIcon';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const SeriesCard = () => {
+const SeriesCard = ({ item }: any) => {
+
+
+  const truncateHexAddress = (hexAddress: string) => {
+    const prefix = hexAddress.slice(0, 4); // Extract the '0x' prefix
+    const truncatedAddress =
+      hexAddress.slice(2, 4) + '...' + hexAddress.slice(-4);
+    return prefix + truncatedAddress;
+  };
+
+
+  console.log('item1', item);
   const router = useRouter();
 
   const [liked, setLiked] = useState(false);
@@ -23,7 +34,7 @@ const SeriesCard = () => {
   return (
     <Card
       isPressable
-      onPress={() => router.push(`/Series/1`)}
+      onPress={() => router.push(`/Series/${item.seriesInfo.series / 10}`)}
       isBlurred
       className='border-none bg-background/60 max-w-[800px] relative'
       shadow='md'
@@ -32,7 +43,7 @@ const SeriesCard = () => {
         <div className=' grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center'>
           <div className='col-span-6 md:col-span-4'>
             <Image
-              src='/NFTImages/incheon3.jpeg'
+              src={item?.data[0].image}
               alt='stamp1'
               width={400}
               height={400}
@@ -44,7 +55,9 @@ const SeriesCard = () => {
             <div className='flex justify-between items-start'>
               <div className='flex flex-col gap-0'>
                 <span className='absolute flex min-w-max text-gray font-semibold  -top-[50px] -right-[0px] opacity-20  leading-0'>
-                  <span className='text-[130px]'>#01</span>
+                  <span className='text-[130px]'>
+                    #{item?.seriesInfo.series / 10}
+                  </span>
                 </span>
                 <a
                   href='#'
@@ -57,31 +70,17 @@ const SeriesCard = () => {
                     className=' mr-3'
                   />
                   <span className='text-md text-white text-semibold '>
-                    GBIC 해커톤
+                    {truncateHexAddress(item?.seriesInfo.owner)}
                   </span>
                 </a>
                 <h1 className='text-xl font-medium mt-2 mb-3'>
-                  강화도 맛집 탐방 시리즈~
+                  {item?.seriesInfo.title}
                 </h1>
                 <p className='text-small text-foreground/80'>
                   {' '}
-                  강화도에 있는 다양한 맛집과 문화재를 탐방하면서 스탬프를
-                  찍어오는 이벤트! 많은 경품과 함께 추후 예정되어 있는
-                  이벤트까지 참여가능!
+                  {item?.seriesInfo.description}
                 </p>
               </div>
-              {/* <Button
-                isIconOnly
-                className='text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2'
-                radius='full'
-                variant='light'
-                onPress={() => setLiked((v) => !v)}
-              >
-                <HeartIcon
-                  className={liked ? '[&>path]:stroke-transparent' : ''}
-                  fill={liked ? 'red' : 'none'}
-                />
-              </Button> */}
             </div>
 
             <div className='flex flex-col mt-3 gap-1'>
@@ -93,11 +92,15 @@ const SeriesCard = () => {
                 }}
                 color='default'
                 size='sm'
-                value={86}
+                value={ 
+                  item?.seriesInfo.applyCount * (100 / Number(item?.seriesInfo.quantity))
+                }
               />
               <div className='flex justify-between'>
-                <p className='text-small'>43명 참여 완료</p>
-                <p className='text-small text-foreground/50'>최대 50명</p>
+                <p className='text-small'>{item?.seriesInfo.applyCount}명 참여 완료</p>
+                <p className='text-small text-foreground/50'>
+                  최대 {item?.seriesInfo.quantity}명
+                </p>
               </div>
             </div>
           </div>

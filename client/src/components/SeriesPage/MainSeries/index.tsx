@@ -23,33 +23,35 @@ import MainSeriesCard from './MainSeriesCard';
 import MainSeriesCard1 from './MainSeriesCard1';
 import MainSeriesCard2 from './MainSeriesCard2';
 
-const MainSeries = ({ ExampleSeries }: any) => {
+const MainSeries = ({ recentSeries }: any) => {
+
+  console.log('recentSeries', recentSeries);
   return (
     <Swiper
      
       spaceBetween={30}
       loop={true}
       effect={'fade'}
-      // autoplay={{
-      //   delay: 2500, 그림자 격자 디자인 추가
-      //   disableOnInteraction: false,
-      // }}
+      autoplay={{
+        delay: 2500, 
+        disableOnInteraction: false,
+      }}
       pagination={{
         clickable: true,
       }}
-      // Autoplay
-      modules={[EffectFade, Navigation, Pagination]}
+      
+      modules={[EffectFade, Navigation, Pagination, Autoplay]}
       className='mySwiper'
     >
-      <SwiperSlide>
-        <MainSeriesCard />
+
+{recentSeries?.map((item: any, index: any) => (
+                
+                <SwiperSlide key={index}>
+        <MainSeriesCard item={item}/>
       </SwiperSlide>
-      <SwiperSlide>
-        <MainSeriesCard1 />
-      </SwiperSlide>
-      <SwiperSlide>
-        <MainSeriesCard2 />
-      </SwiperSlide>
+              
+            ))}
+      
       
     </Swiper>
   );

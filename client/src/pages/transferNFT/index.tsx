@@ -4,10 +4,9 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 const index = () => {
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const {
     register,
@@ -22,12 +21,12 @@ const index = () => {
     toast.info('스템프 NFT 전달 중');
     const application = {
       address: data.receiverAddress,
-      series: Number(data.seriesNumber),
+      series: (Number(data.seriesNumber) * 10),
       stamp: Number(data.stampNumber),
     };
 
     try {
-      const response = await fetch('http://13.232.70.72/participate-series', {
+      const response = await fetch('http://13.232.70.72/transfer-nft', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

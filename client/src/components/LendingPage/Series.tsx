@@ -2,7 +2,7 @@ import { PEOPLE_URL } from '@/constants';
 import Image from 'next/image';
 
 // import Swiper core and required modules
-import { Navigation, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCube, Pagination } from 'swiper/modules';
@@ -26,7 +26,7 @@ const SeriesSite = ({
   title,
   subtitle,
   peopleJoined,
-  num
+  num,
 }: SeriesProps) => {
   return (
     <div
@@ -44,8 +44,7 @@ const SeriesSite = ({
         </div>
 
         <span className='text-[200px] flex flex-col text-white font-semibold absolute -bottom-[120px] opacity-40 left-0 leading-0'>
-          <span className='text-[100px] -mb-20'>Series</span>
-          0{num}
+          <span className='text-[100px] -mb-20'>Series</span>0{num}
         </span>
 
         <div className='flexCenter gap-6'>
@@ -73,14 +72,16 @@ const Series = () => {
     <section className='2xl:max-container relative flex flex-col py-10 lg:mb-10 lg:py-20 '>
       <div className='hide-scrollbar sm:flex hidden h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px]'>
         <Swiper
-          // install Swiper modules
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           spaceBetween={50}
           slidesPerView={3}
           navigation
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           loop={true}
           pagination={{ clickable: true }}
-          // scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
           className='h-full w-full '
         >
@@ -90,7 +91,7 @@ const Series = () => {
               title='인천 캠핑장 스탬프 코스!'
               subtitle='Series 1'
               peopleJoined='40+ 참여중'
-              num="1"
+              num='1'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -99,7 +100,7 @@ const Series = () => {
               title='인천 골목 맛집 스템프'
               subtitle='Series 2'
               peopleJoined='30+ 참여중'
-              num="2"
+              num='2'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -108,7 +109,7 @@ const Series = () => {
               title='영종도 카페 스탬프'
               subtitle='Series 3'
               peopleJoined='20+ 참여중'
-              num="3"
+              num='3'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -117,21 +118,23 @@ const Series = () => {
               title='인천 박물관 스템프 이벤트'
               subtitle='Series 4'
               peopleJoined='50+ 참여중'
-              num="4"
+              num='4'
             />
           </SwiperSlide>
         </Swiper>
       </div>
       <div className='hide-scrollbar sm:hidden flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px]'>
         <Swiper
-          // install Swiper modules
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           spaceBetween={50}
           slidesPerView={1}
           navigation
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           loop={true}
           pagination={{ clickable: true }}
-          // scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
           className='h-full w-full '
         >
@@ -141,7 +144,7 @@ const Series = () => {
               title='강화도 여행 코스~!'
               subtitle='Series 1'
               peopleJoined='50+ 참여중'
-              num="1"
+              num='1'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -150,7 +153,7 @@ const Series = () => {
               title='인천 골목 맛집'
               subtitle='Series 2'
               peopleJoined='50+ 참여중'
-              num="2"
+              num='2'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -159,7 +162,7 @@ const Series = () => {
               title='영종도 카페'
               subtitle='Series 3'
               peopleJoined='50+ 참여중'
-              num="3"
+              num='3'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -168,7 +171,7 @@ const Series = () => {
               title='강화도 유적지'
               subtitle='Series 4'
               peopleJoined='50+ 참여중'
-              num="4"
+              num='4'
             />
           </SwiperSlide>
         </Swiper>

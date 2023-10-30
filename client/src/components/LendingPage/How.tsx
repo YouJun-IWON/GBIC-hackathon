@@ -13,7 +13,7 @@ const How = () => {
   const [active, setActive] = useState('world-2');
 
   return (
-    <section className={`${styles.paddings}`} id='explore'>
+    <section className={`${styles.paddings} mt-10`} id='explore'>
       <motion.div
     
         initial='hidden'

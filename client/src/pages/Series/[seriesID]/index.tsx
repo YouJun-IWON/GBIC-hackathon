@@ -15,7 +15,7 @@ import { useSession } from 'next-auth/react';
 
 import Image from 'next/image';
 
-import { Progress, Snippet } from '@nextui-org/react';
+import { Button, Progress, Snippet } from '@nextui-org/react';
 
 import './styles.module.css';
 
@@ -28,17 +28,22 @@ import 'swiper/css/pagination';
 import { EffectCube, Pagination } from 'swiper/modules';
 import { seriesMintInfo } from '@/constants/category';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   console.log('getServerSide33', context.params?.seriesID);
   let seriesInfo: any = '';
 
+  // const queryNum: any = (context.params?.seriesID) * 10
+
+  const seriesID: any = context.params?.seriesID;
+
   try {
     // Send GET request using axios
     const response = await axios.get(
-      `http://13.232.70.72:80/series?id=${context.params?.seriesID}`
+      `http://13.232.70.72:80/series?id=${seriesID * 10}`
     );
-    console.log(response);
+    console.log('resdewdeponse', response.data);
 
     // Access the response data
     seriesInfo = response.data;
@@ -47,6 +52,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     console.error('Error fetching user profile:', error);
     seriesInfo = null;
   }
+
+  
 
   // const transaction = await fetch(
   //   `http://13.232.70.72:80/series?id=${context.params?.seriesID}`
@@ -77,11 +84,13 @@ const SeriesID = (props: { transaction: any }) => {
     }
   );
 
-  const [index, setIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // const [index, setIndex] = useState(0);
 
   const router = useRouter();
 
-  const { transactionId } = router.query;
+  // const { transactionId } = router.query;
 
   // useEffect(() => {
   //   if (transactionId !== null) {
@@ -98,10 +107,14 @@ const SeriesID = (props: { transaction: any }) => {
 
 
   const handleClick = async () => {
+    setIsLoading(true);
+    toast.info('신청 진행 중')
     const application = {
       address: `${user.address}`,
-      seriesId: Number(`${transaction.seriesInfo.series / 10}`),
+      seriesId: Number(`${transaction.seriesInfo.series}`),
     };
+
+    console.log('application', application);
     
     try {
       const response = await fetch('http://13.232.70.72/participate-series', {
@@ -113,8 +126,13 @@ const SeriesID = (props: { transaction: any }) => {
       });
       const data = await response.json();
       console.log(data);
+      toast.success('신청 완료 및 스탬프 보드 전송 완료(시간 소요)')
+      router.push(`/MyNFT/${user.address}`);
     } catch (error) {
       console.log('Error: ' + error);
+      toast.error('신청 실패' + error); 
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -147,7 +165,7 @@ const SeriesID = (props: { transaction: any }) => {
               >
                 <SwiperSlide>
                   <Image
-                    src='/NFTImages/stampBoardA.png'
+                    src={transaction.data[0].image}
                     width={800}
                     height={800}
                     alt='we'
@@ -170,7 +188,7 @@ const SeriesID = (props: { transaction: any }) => {
                 <dt className='mb-2 font-semibold leading-none text-gray-900 '>
                   시리즈 유효 기간
                 </dt>
-                <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
+                <dd className='mb-4 break-words font-light text-gray-600 sm:mb-5 '>
                   {formatTime(transaction.seriesInfo.useWhenFrom)} ~{' '}
                   {formatTime(transaction.seriesInfo.useWhenTo)}
                 </dd>
@@ -198,7 +216,7 @@ const SeriesID = (props: { transaction: any }) => {
                 <dt className='mb-2 font-semibold leading-none text-gray-900 '>
                   주최 사/인
                 </dt>
-                <dd className='mb-4 font-light text-gray-600 sm:mb-5 '>
+                <dd className='mb-4 font-light break-words text-gray-600 sm:mb-5 '>
                   {transaction.seriesInfo.owner}
                 </dd>
               </div>
@@ -225,7 +243,9 @@ const SeriesID = (props: { transaction: any }) => {
             <div className='flex-col items-center '>
               <br />
 
-              <button
+              <Button
+                isLoading={isLoading}
+                isDisabled={isLoading}   
                 className='inline-flex text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-xl shadow-green-500/50 font-medium rounded-lg text-lg px-5 py-3 text-center mr-2 mb-2'
                 onClick={() => {
                   if (session === null) {
@@ -233,7 +253,7 @@ const SeriesID = (props: { transaction: any }) => {
                     router.push('/auth/login');
                     return;
                   } 
-                  handleClick
+                  handleClick()
                 }}
               >
                 <svg
@@ -247,7 +267,7 @@ const SeriesID = (props: { transaction: any }) => {
                   <path d='M10.233 11.1a.613.613 0 1 0-.867-.868.613.613 0 0 0 .867.868Z' />
                 </svg>
                 신청하기
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -268,7 +288,7 @@ const SeriesID = (props: { transaction: any }) => {
           }}
           color='default'
           size='md'
-          value={
+          value={ // TODO: count 변수 확인 
             transaction.count * (100 / Number(transaction.seriesInfo.quantity))
           }
         />

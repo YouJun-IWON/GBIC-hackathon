@@ -2,8 +2,18 @@ import { Avatar, Button, Progress } from '@nextui-org/react';
 import Image from 'next/image';
 import { useMotionValue, useTransform, motion } from 'framer-motion';
 import Link from 'next/link';
+import { formatTime } from '@/helpers/dayjs';
 
-const MainSeriesCard = () => {
+const MainSeriesCard = ({item}: any) => {
+
+  const truncateHexAddress = (hexAddress: string) => {
+    const prefix = hexAddress.slice(0, 4); // Extract the '0x' prefix
+    const truncatedAddress =
+      hexAddress.slice(2, 4) + '...' + hexAddress.slice(-4);
+    return prefix + truncatedAddress;
+  };
+
+  console.log('mmmmm', item);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [30, -30]);
@@ -18,7 +28,7 @@ const MainSeriesCard = () => {
             className='inline-flex justify-between items-center px-1 pr-4 mb-7 text-sm text-gray-700 bg-green-400 rounded-full hover:bg-gray-200 '
           >
             <span className='absolute flex min-w-max text-gray font-semibold  sm:-top-[50px] sm:-left-[150px] ml-48 opacity-20  leading-0'>
-              <span className='text-[130px]'>#01</span>
+              <span className='text-[130px]'>#{item?.seriesInfo.series / 10}</span>
             </span>
 
             <Avatar
@@ -28,16 +38,15 @@ const MainSeriesCard = () => {
               className=' mr-3'
             />
             <span className='text-md text-white text-semibold '>
-              GBIC 해커톤
+              {truncateHexAddress(item.seriesInfo.owner)}
             </span>
           </a>
 
           <h1 className='max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl '>
-            강화도 맛집 탐방 시리즈~
+          {item.seriesInfo.title}
           </h1>
-          <p className='max-w-2xl mb-2 font-light text-gray-500 lg:mb-3 md:text-lg lg:text-xl dark:text-gray-400'>
-            강화도에 있는 다양한 맛집과 문화재를 탐방하면서 스탬프를 찍어오는
-            이벤트! 많은 경품과 함께 추후 예정되어 있는 이벤트까지 참여가능!
+          <p className='max-w-2xl mb-2 block font-light text-gray-500 lg:mb-3 md:text-lg lg:text-xl break-words dark:text-gray-400'>
+          {item.seriesInfo.description}
           </p>
 
           <div className='flex flex-col mt-5 gap-1'>
@@ -49,33 +58,35 @@ const MainSeriesCard = () => {
               }}
               color='default'
               size='sm'
-              value={86}
+              value={ 
+                item?.seriesInfo.applyCount * (100 / Number(item?.seriesInfo.quantity))
+              }
             />
             <div className='flex justify-between'>
-              <p className='text-small'>43명 참여 완료</p>
-              <p className='text-small text-foreground/50'>최대 50명</p>
+              <p className='text-small'>{item?.seriesInfo.applyCount}명 참여 완료</p>
+              <p className='text-small text-foreground/50'>최대 {item?.seriesInfo.quantity}명</p>
             </div>
           </div>
 
           <blockquote className='p-4 my-4 border-l-4 border-teal-400 bg-teal-50 space-y-1'>
             <span className='text-md flex text-green-500'>
               <p>시리즈 진행 기간 : &nbsp;</p>
-              <p>2023.10.28</p>
+              <p>{formatTime(item?.seriesInfo.useWhenFrom)}</p>
               <p>&nbsp;~&nbsp;</p>
-              <p>2023.10.31</p>
+              <p>{formatTime(item?.seriesInfo.useWhenTo)}</p>
             </span>
             <span className='text-md flex text-green-500 '>
               <p>혜택 : &nbsp;</p>
-              <p>지역 문화 상품권 10000 p</p>
+              <p>{item?.seriesInfo.benefit}</p>
             </span>
             <span className='text-md flex text-green-500 '>
               <p>사용처 : &nbsp;</p>
-              <p>인천 종합 어시장</p>
+              <p>{item?.seriesInfo.useWhere}</p>
             </span>
           </blockquote>
 
           <Link
-          href='/Series/1'
+          href={`/Series/${item?.seriesInfo.series / 10}`}
           className='mt-5 relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-green-400 border-2 border-green-400 rounded-full hover:text-white group hover:bg-gray-50'
         >
           <span className='absolute left-0 block w-full h-0 transition-all bg-green-400 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease'></span>
@@ -118,7 +129,7 @@ const MainSeriesCard = () => {
             whileTap={{ cursor: 'grabbing' }}
           >
             <Image
-              src='/NFTImages/stampBoardA.png'
+              src={item?.data[0].image}
               height={500}
               width={500}
               alt='Stamp Board Image of Main Series'
@@ -134,28 +145,28 @@ const MainSeriesCard = () => {
                 draggable='false'
               >
                 <Image
-                  src='/NFTImages/incheon1.jpeg'
+                  src={item?.data[1].image}
                   alt='stamp1'
                   width={100}
                   height={100}
                   className='rounded-xl shadow-2xl'
                 />
                 <Image
-                  src='/NFTImages/incheon1.jpeg'
+                  src={item?.data[2].image}
                   alt='stamp1'
                   width={100}
                   height={100}
                   className='rounded-xl shadow-2xl'
                 />
                 <Image
-                  src='/NFTImages/incheon1.jpeg'
+                  src={item?.data[3].image}
                   alt='stamp1'
                   width={100}
                   height={100}
                   className='rounded-xl shadow-2xl'
                 />
                 <Image
-                  src='/NFTImages/incheon1.jpeg'
+                  src={item?.data[4].image}
                   alt='stamp1'
                   width={100}
                   height={100}

@@ -113,7 +113,7 @@ export const Step = [
   },
   {
     id: 'world-4',
-    imgUrl: '/lendingPage/planet-04.png',
+    imgUrl: '/realCheck.png',
     title: '미션 수행하면서 스탬프 NFT 받기',
     desc: '미션을 수행했다면 Burrito Wallet 또는 SNS 를 통해 행위인증을 진행하세요. Burrito Wallet에 접속 후 You Jun 에게 본인의 얼굴과 해당 위치를 식별할 수 있는 장소에서 찍은 사진과 함께 지갑 주소를 메세지를 보내는 것이 행위 인증의 전부입니다.'
   },
@@ -190,3 +190,68 @@ export const ExampleSeries = {
     series: 1,
   },
 };
+
+
+export const testUser = [
+  {
+      "id": 2,
+      "account": "0x435c7fAE3C33Bab84FF032A7af1ca531aeD2B2e7",
+      "name": null,
+      "email": null,
+      "image": null,
+      "createdAt": "2023-10-30T02:44:12.000Z",
+      "updatedAt": "2023-10-30T02:44:12.000Z",
+      "deletedAt": null
+  },
+  {
+      "data": [
+          {
+              "name": "Series 1 Stamp Board",
+              "image": "https://res.cloudinary.com/dhtq54adh/image/upload/v1698513934/%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8_%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7-5_rzlxlp.png",
+              "description": "aaaa",
+              "attributes": [
+                  {
+                      "trait_type": "Series",
+                      "value": 290
+                  }
+              ]
+          },
+          {
+              "name": "Series 1 Stamp 3",
+              "image": "https://res.cloudinary.com/dhtq54adh/image/upload/v1698513940/incheon1_ukgwtg.jpg",
+              "description": "nnnn",
+              "attributes": [
+                  {
+                      "trait_type": "Latitude",
+                      "value": "37.4631505"
+                  },
+                  {
+                      "trait_type": "Longtitude",
+                      "value": "126.4474815"
+                  },
+                  {
+                      "trait_type": "Address",
+                      "value": "대한민국 인천광역시 중구 공항로 인천국제공항 (ICN)"
+                  },
+                  {
+                      "trait_type": "Series",
+                      "value": "1"
+                  }
+              ]
+          }
+      ],
+      "baseURI": "https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs/QmbJvDptQstq75CwLTRuBXnvfDNqgjJZWdtDxN7y8eHSuQ",
+      "seriesInfo": {
+          "series": 290,
+          "title": "pppp",
+          "benefit": "oooo",
+          "description": "yyyy",
+          "quantity": 20,
+          "owner": "0x12345",
+          "useWhere": "uuuu",
+          "useWhenFrom": "2023-10-29T15:00:00.000Z",
+          "useWhenTo": "2023-10-30T15:00:00.000Z",
+          "applyCount": 1
+      }
+  }
+]
