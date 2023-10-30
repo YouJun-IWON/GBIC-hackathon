@@ -13,13 +13,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Link from 'next/link';
 
-
-
 interface SeriesProps {
   backgroundImage: string;
   title: string;
   subtitle: string;
   peopleJoined: string;
+  num: string;
 }
 
 const SeriesSite = ({
@@ -27,6 +26,7 @@ const SeriesSite = ({
   title,
   subtitle,
   peopleJoined,
+  num
 }: SeriesProps) => {
   return (
     <div
@@ -45,7 +45,7 @@ const SeriesSite = ({
 
         <span className='text-[200px] flex flex-col text-white font-semibold absolute -bottom-[120px] opacity-40 left-0 leading-0'>
           <span className='text-[100px] -mb-20'>Series</span>
-          01
+          0{num}
         </span>
 
         <div className='flexCenter gap-6'>
@@ -63,7 +63,6 @@ const SeriesSite = ({
           </span>
           <p className='bold-16 md:bold-20 text-white'>{peopleJoined}</p>
         </div>
-        
       </div>
     </div>
   );
@@ -83,39 +82,42 @@ const Series = () => {
           pagination={{ clickable: true }}
           // scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
-          
           className='h-full w-full '
         >
           <SwiperSlide>
             <SeriesSite
               backgroundImage='bg-bg-img-1'
-              title='강화도 여행 코스~!'
+              title='인천 캠핑장 스탬프 코스!'
               subtitle='Series 1'
-              peopleJoined='50+ 참여중'
+              peopleJoined='40+ 참여중'
+              num="1"
             />
           </SwiperSlide>
           <SwiperSlide>
             <SeriesSite
-              backgroundImage='bg-bg-img-1'
-              title='인천 골목 맛집'
+              backgroundImage='bg-bg-img-2'
+              title='인천 골목 맛집 스템프'
               subtitle='Series 2'
-              peopleJoined='50+ 참여중'
+              peopleJoined='30+ 참여중'
+              num="2"
             />
           </SwiperSlide>
           <SwiperSlide>
             <SeriesSite
-              backgroundImage='bg-bg-img-1'
-              title='영종도 카페'
+              backgroundImage='bg-bg-img-4'
+              title='영종도 카페 스탬프'
               subtitle='Series 3'
-              peopleJoined='50+ 참여중'
+              peopleJoined='20+ 참여중'
+              num="3"
             />
           </SwiperSlide>
           <SwiperSlide>
             <SeriesSite
-              backgroundImage='bg-bg-img-1'
-              title='강화도 유적지'
+              backgroundImage='bg-bg-img-3'
+              title='인천 박물관 스템프 이벤트'
               subtitle='Series 4'
               peopleJoined='50+ 참여중'
+              num="4"
             />
           </SwiperSlide>
         </Swiper>
@@ -131,9 +133,7 @@ const Series = () => {
           pagination={{ clickable: true }}
           // scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
-          
           className='h-full w-full '
-          
         >
           <SwiperSlide>
             <SeriesSite
@@ -141,6 +141,7 @@ const Series = () => {
               title='강화도 여행 코스~!'
               subtitle='Series 1'
               peopleJoined='50+ 참여중'
+              num="1"
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -149,6 +150,7 @@ const Series = () => {
               title='인천 골목 맛집'
               subtitle='Series 2'
               peopleJoined='50+ 참여중'
+              num="2"
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -157,6 +159,7 @@ const Series = () => {
               title='영종도 카페'
               subtitle='Series 3'
               peopleJoined='50+ 참여중'
+              num="3"
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -165,6 +168,7 @@ const Series = () => {
               title='강화도 유적지'
               subtitle='Series 4'
               peopleJoined='50+ 참여중'
+              num="4"
             />
           </SwiperSlide>
         </Swiper>

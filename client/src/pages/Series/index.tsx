@@ -3,31 +3,40 @@ import MainSeries from '@/components/SeriesPage/MainSeries';
 
 
 import { ExampleSeries } from '@/constants';
+import axios from 'axios';
 
+export async function getServerSideProps() {
 
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//   console.log('getServerSide33', context.params?.seriesID);
-//   const transaction = await fetch(
-//     `http://localhost:3000/api/get-transaction/get-transaction?id=${context.params?.seriesID}`
-//   )
-//     .then((res) => res.json())
-//     .then((data) => {
-//       if (!data.items) {
-//         context.res.writeHead(302, { Location: '/item_not_exist ' });
-//         context.res.end();
-//         return;
-//       }
-//       return data.items;
-//     });
+  let allSeries: any = '';
+  
+  try {
+    // Send GET request using axios
+    const response = await axios.get(
+      `http://13.232.70.72:80/series?id=`
+    );
+    console.log(response);
 
-//   return {
-//     props: { transaction: { ...transaction } },
-//   };
-// }
+    // Access the response data
+    allSeries = response.data;
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    allSeries = null;
+  }
+
+  return {
+    props: { transaction: { ...allSeries } },
+  };
+}
 
 
 
 const index = (props: { transaction: any }) => {
+
+  const transaction = props.transaction;
+
+  console.log('transaction', transaction);
+  
   return (
     <div className='mb-20'>
  

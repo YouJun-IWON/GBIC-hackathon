@@ -39,8 +39,9 @@ const config: Config = {
       },
       backgroundImage: {
         'bg-img-1': "url('/lendingPage/img-1.png')",
-        'bg-img-2': "url('/lendingPage/img-2.png')",
-        
+        'bg-img-2': "url('/NFTImages/food.png')",
+        'bg-img-3': "url('/NFTImages/cul4.png')",
+        'bg-img-4': "url('/NFTImages/cafe.png')",
       },
       screens: {
         xs: '400px',

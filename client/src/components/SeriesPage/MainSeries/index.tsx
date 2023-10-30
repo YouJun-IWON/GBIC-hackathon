@@ -50,7 +50,7 @@ const MainSeries = ({ ExampleSeries }: any) => {
       <SwiperSlide>
         <MainSeriesCard2 />
       </SwiperSlide>
-      ...
+      
     </Swiper>
   );
 };

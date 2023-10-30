@@ -31,7 +31,7 @@ import axios from 'axios';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   console.log('getServerSide33', context.params?.seriesID);
-  let userProfile: any = '';
+  let seriesInfo: any = '';
 
   try {
     // Send GET request using axios
@@ -41,11 +41,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     console.log(response);
 
     // Access the response data
-    userProfile = response.data;
+    seriesInfo = response.data;
     console.log(response.data);
   } catch (error) {
     console.error('Error fetching user profile:', error);
-    userProfile = null;
+    seriesInfo = null;
   }
 
   // const transaction = await fetch(
@@ -62,7 +62,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   //   });
 
   return {
-    props: { transaction: { ...userProfile } },
+    props: { transaction: { ...seriesInfo } },
   };
 }
 
@@ -95,26 +95,30 @@ const SeriesID = (props: { transaction: any }) => {
 
   console.log('transaction', transaction);
 
-  // const application = {
-  //   address: '',
-  //   seriesId: `${transaction.id}`,
-  // };
 
-  // const handleClick = async () => {
-  //   try {
-  //     const response = await fetch('http://13.232.70.72/participate-series', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(application),
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log('Error: ' + error);
-  //   }
-  // };
+
+  const handleClick = async () => {
+    const application = {
+      address: `${user.address}`,
+      seriesId: Number(`${transaction.seriesInfo.series / 10}`),
+    };
+    
+    try {
+      const response = await fetch('http://13.232.70.72/participate-series', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(application),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log('Error: ' + error);
+    }
+  };
+
+  
 
   // const transactionImages = {
   //   imageSrc: String(transaction.imageSrc),
@@ -228,7 +232,8 @@ const SeriesID = (props: { transaction: any }) => {
                     alert('Login first');
                     router.push('/auth/login');
                     return;
-                  }
+                  } 
+                  handleClick
                 }}
               >
                 <svg

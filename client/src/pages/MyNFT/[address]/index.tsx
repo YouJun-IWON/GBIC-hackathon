@@ -189,28 +189,28 @@ const Profile = (props: { userProfile: any }) => {
                     draggable='false'
                   >
                     <Image
-                      src='/NFTImages/incheon1.jpeg'
+                      src='/NFTImages/tradition1.jpeg'
                       alt='stamp1'
                       width={90}
                       height={90}
                       className='rounded-xl shadow-2xl'
                     />
                     <Image
-                      src='/NFTImages/incheon2.jpeg'
+                      src='/NFTImages/tradition2.jpeg'
                       alt='stamp1'
                       width={90}
                       height={90}
                       className='rounded-xl shadow-2xl'
                     />
                     <Image
-                      src='/NFTImages/incheon3.jpeg'
+                      src='/NFTImages/tradition3.jpeg'
                       alt='stamp1'
                       width={90}
                       height={90}
                       className='rounded-xl shadow-2xl'
                     />
                     <Image
-                      src='/NFTImages/incheon4.jpeg'
+                      src='/NFTImages/tradition4.jpeg'
                       alt='stamp1'
                       width={90}
                       height={90}
@@ -220,7 +220,7 @@ const Profile = (props: { userProfile: any }) => {
                 </div>
                 <div className='relative flex justify-center'>
                   <Card
-                    shadow='sm'
+                    shadow='lg'
                     isPressable
                     onPress={() => console.log('item pressed')}
                   >
@@ -229,19 +229,74 @@ const Profile = (props: { userProfile: any }) => {
                         width={400}
                         height={400}
                         alt='NextUI hero Image'
-                        src='/NFTImages/stampBoardA.png'
+                        src='/NFTImages/stampExample2.png'
                         className='min-w-[400px]'
                       />
                     </CardBody>
-                    <CardFooter className='text-small justify-between'>
-                      <b>Title</b>
-                      <p className='text-default-500'>Series 1</p>
+                    <CardFooter className='text-md px-4 mx-auto'>
+                      <div className=' px-4 mx-auto w-full '>
+                        <div className='flex justify-between'>
+                          <p className='text-lg'>Series 2</p>
+                          <p className='text-lg '>100%</p>
+                        </div>
+                        <Progress
+                          aria-label='Music progress'
+                          classNames={{
+                            base: 'max-w-md',
+                            track: 'drop-shadow-md border border-default',
+                            indicator:
+                              'bg-gradient-to-r from-blue-500 to-green-500',
+                            label:
+                              'tracking-wider font-medium text-default-600',
+                            value: 'text-green-50',
+                          }}
+                          color='default'
+                          size='md'
+                          value={75}
+                        />
+                      </div>
                     </CardFooter>
                   </Card>
+
+                  <div
+                    className='absolute grid grid-rows-2 grid-cols-2 gap-9 top-24'
+                    draggable='false'
+                  >
+                    <Image
+                      src='/NFTImages/incheon1.jpeg'
+                      alt='stamp1'
+                      width={90}
+                      height={90}
+                      className='rounded-full shadow-2xl'
+                    />
+                    <Image
+                      src='/NFTImages/incheon2.jpeg'
+                      alt='stamp1'
+                      width={90}
+                      height={90}
+                      className='rounded-full shadow-2xl'
+                    />
+                    <Image
+                      src='/NFTImages/incheon3.jpeg'
+                      alt='stamp1'
+                      width={90}
+                      height={90}
+                      className='rounded-full shadow-2xl'
+                    />
+                    {/* <Image
+                      src='/NFTImages/incheon4.jpeg'
+                      alt='stamp1'
+                      width={90}
+                      height={90}
+                      className='rounded-full shadow-2xl'
+                    /> */}
+                  </div>
+                  
                 </div>
+
                 <div className='relative flex justify-center'>
                   <Card
-                    shadow='sm'
+                    shadow='lg'
                     isPressable
                     onPress={() => console.log('item pressed')}
                   >
@@ -250,37 +305,71 @@ const Profile = (props: { userProfile: any }) => {
                         width={400}
                         height={400}
                         alt='NextUI hero Image'
-                        src='/NFTImages/stampBoardA.png'
+                        src='/NFTImages/stampCultureCom.png'
                         className='min-w-[400px]'
                       />
                     </CardBody>
-                    <CardFooter className='text-small justify-between'>
-                      <b>Title</b>
-                      <p className='text-default-500'>Series 1</p>
+                    <CardFooter className='text-md px-4 mx-auto'>
+                      <div className=' px-4 mx-auto w-full '>
+                        <div className='flex justify-between'>
+                          <p className='text-lg'>Series 3</p>
+                          <p className='text-lg '>100%</p>
+                        </div>
+                        <Progress
+                          aria-label='Music progress'
+                          classNames={{
+                            base: 'max-w-md',
+                            track: 'drop-shadow-md border border-default',
+                            indicator:
+                              'bg-gradient-to-r from-blue-500 to-green-500',
+                            label:
+                              'tracking-wider font-medium text-default-600',
+                            value: 'text-green-50',
+                          }}
+                          color='default'
+                          size='md'
+                          value={100}
+                        />
+                      </div>
                     </CardFooter>
                   </Card>
-                </div>
-                <div className='relative flex justify-center'>
-                  <Card
-                    shadow='sm'
-                    isPressable
-                    onPress={() => console.log('item pressed')}
+
+                  <div
+                    className='absolute grid grid-rows-2 grid-cols-2 gap-9 top-24'
+                    draggable='false'
                   >
-                    <CardBody className='overflow-visible p-0'>
-                      <Image
-                        width={400}
-                        height={400}
-                        alt='NextUI hero Image'
-                        src='/NFTImages/stampBoardA.png'
-                        className='min-w-[400px]'
-                      />
-                    </CardBody>
-                    <CardFooter className='text-small justify-between'>
-                      <b>Title</b>
-                      <p className='text-default-500'>Series 1</p>
-                    </CardFooter>
-                  </Card>
+                    {/* <Image
+                      src='/NFTImages/incheon1.jpeg'
+                      alt='stamp1'
+                      width={90}
+                      height={90}
+                      className='rounded-full shadow-2xl'
+                    />
+                    <Image
+                      src='/NFTImages/incheon2.jpeg'
+                      alt='stamp1'
+                      width={90}
+                      height={90}
+                      className='rounded-full shadow-2xl'
+                    />
+                    <Image
+                      src='/NFTImages/incheon3.jpeg'
+                      alt='stamp1'
+                      width={90}
+                      height={90}
+                      className='rounded-full shadow-2xl'
+                    />
+                    <Image
+                      src='/NFTImages/incheon4.jpeg'
+                      alt='stamp1'
+                      width={90}
+                      height={90}
+                      className='rounded-full shadow-2xl'
+                    /> */}
+                  </div>
+                  
                 </div>
+                
               </div>
             </div>
           </div>

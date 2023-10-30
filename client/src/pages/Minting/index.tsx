@@ -80,11 +80,7 @@ const ERC1155 = (props: { seriesId: any }) => {
     },
   };
 
-  //u2bPal9GH8lTIeianzpFXp2kBc-ebdV9VG47q2V2OdcmOqCjYJeUMGu06yi5KeDeKNXNBwm57JukunJmeCD33g
 
-  // const storage = new ThirdwebStorage({
-  //   secretKey:"qJaoFfdNEXknBlleblwy4bidrENIkbgyM9UKCmTArGa-d-RMoiLi6zvN1gnyZLrlSgCLiVf-lty5o2ON_7AFcQ", // You can get one from dashboard settings
-  // });
 
   const {
     register,

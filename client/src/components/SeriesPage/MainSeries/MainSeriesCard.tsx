@@ -17,7 +17,7 @@ const MainSeriesCard = () => {
             href='#'
             className='inline-flex justify-between items-center px-1 pr-4 mb-7 text-sm text-gray-700 bg-green-400 rounded-full hover:bg-gray-200 '
           >
-            <span className='absolute flex min-w-max text-gray font-semibold  -top-[50px] -left-[150px] opacity-20  leading-0'>
+            <span className='absolute flex min-w-max text-gray font-semibold  sm:-top-[50px] sm:-left-[150px] ml-48 opacity-20  leading-0'>
               <span className='text-[130px]'>#01</span>
             </span>
 

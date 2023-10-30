@@ -70,7 +70,7 @@ export const FOOTER_CONTACT_INFO = {
   title: 'Contact Us',
   links: [
     { label: 'Admin Officer', value: '123-456-7890' },
-    { label: 'Email Officer', value: 'dNFTwithIncheon@dNFTwithIncheon.com' },
+    { label: 'Email Officer', value: 'dNFTwithIncheon.com' },
   ],
 };
 
@@ -119,7 +119,7 @@ export const Step = [
   },
   {
     id: 'world-5',
-    imgUrl: '/lendingPage/planet-05.png',
+    imgUrl: '/benefit.png',
     title: '준비된 또는 뜻밖의 혜택 받기',
     desc: '행위 인증이 인정받게 되면 도장 NFT를 받게되고 MyNFT에서 스탬프 보드 NFT 위에 찍혀 있는 NFT을 확인 할 수 있습니다! 이제 이 NFT는 예정된 또는, 뜻밖의 혜택을 받을 수 있는 티켓이 됩니다.'
   },
