@@ -45,7 +45,7 @@ export async function getServerSideProps() {
 const ERC1155 = (props: { seriesId: any }) => {
   const seriesid = props.seriesId;
 
-  const seriesId = seriesid ? seriesid / 10 : 1;
+  const seriesId = Number.isNaN(seriesid) ? Number(seriesid) / 10 : 1;
 
   console.log('seriesId', seriesId);
 
