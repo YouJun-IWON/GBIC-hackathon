@@ -101,13 +101,13 @@ export const Step = [
   },
   {
     id: 'world-2',
-    imgUrl: '/lendingPage/planet-02.png',
+    imgUrl: '/NFTImages/search.png',
     title: '진행중인 시리즈 둘러보기',
     desc: 'Series 페이지에서 현재 진행중인 Series를 확인하세요. NFT 수량은 정해져 있는 만큼 빠른 선점이 필요할 수 있습니다.'
   },
   {
     id: 'world-3',
-    imgUrl: '/lendingPage/planet-03.png',
+    imgUrl: '/NFTImages/apply.png',
     title: '원하는 시리즈 선택 후 스템프 보드 NFT 및 스템프 NFT 받기',
     desc: '자신이 하고 싶은 Series를 빠르게 선택하고 도장(스탬프) NFT를 찍을 스템프 보드 NFT를 받으세요. 그리고 각각의 스템프 NFT를 받기 위한 조건(위치 및 유효기간)을 확인하세요.'
   },
