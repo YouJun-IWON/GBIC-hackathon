@@ -1,4 +1,3 @@
-# 2023-GBIC-Hackerthon
-Main project repository for 2023 GBIC Hackerthon
+# 2023-LBANK-hackathon
 
-
+Main project repository for 2023 LBANK hackathon
