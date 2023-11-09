@@ -1,3 +1,4 @@
+
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -57,10 +58,8 @@ const Profile = (props: { transaction: any }) => {
   const profileData = profile[0];
 
   const userNFTData = Object.keys(profile)
-  .filter(key => key !== "0")
-  // .map(key => (profile[key] ));
-  
-  
+    .filter((key) => key !== '0')
+    .map((key: any) => profile[key]);
 
   userNFTData.map((item: any) => (NFTCount += item.data.length));
 
@@ -68,8 +67,7 @@ const Profile = (props: { transaction: any }) => {
   console.log('userNFTData', userNFTData);
 
   //! offcanvas
-  const [isOpen, setIsOpen] = useState(false);
-
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='bg-white '>
@@ -186,8 +184,12 @@ const Profile = (props: { transaction: any }) => {
                       <CardFooter className='text-md px-4 mx-auto'>
                         <div className=' px-4 mx-auto w-full '>
                           <div className='flex justify-between'>
-                            <p className='text-lg'>Series {item.seriesInfo.series / 10}</p>
-                            <p className='text-lg '>{((item.data.length -1 ) * 100 / 4) }%</p>
+                            <p className='text-lg'>
+                              Series {item.seriesInfo.series / 10}
+                            </p>
+                            <p className='text-lg '>
+                              {((item.data.length - 1) * 100) / 4}%
+                            </p>
                           </div>
                           <Progress
                             aria-label='Music progress'
@@ -202,7 +204,7 @@ const Profile = (props: { transaction: any }) => {
                             }}
                             color='default'
                             size='md'
-                            value={((item.data.length -1 ) * 100 / 4) }
+                            value={((item.data.length - 1) * 100) / 4}
                           />
                         </div>
                       </CardFooter>

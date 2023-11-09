@@ -37,16 +37,14 @@ export default function App() {
   const router = useRouter();
 
   const pathName = usePathname();
-  const isMintingPage = pathName.startsWith('/Minting');
+  console.log(pathName);
 
   const icons = {
     chevron: <ChevronDown fill='currentColor' size={16} />,
     scale: <Scale className='text-warning' fill='currentColor' size={30} />,
-   
-    activity: (
-      <Activity className='text-secondary' fill='green' size={30} />
-    ),
-   
+
+    activity: <Activity className='text-secondary' fill='green' size={30} />,
+
     user: <TagUser className='text-danger' fill='purple' size={30} />,
   };
 
@@ -114,7 +112,11 @@ export default function App() {
               <Button
                 disableRipple
                 className={`p-0 bg-transparent data-[hover=true]:bg-transparent text-md ${
-                  isMintingPage ? 'text-primary' : ''
+                  pathName === '/Minting/NFTTicket' ||
+                  pathName === '/Minting/DNFTStampTicket' ||
+                  pathName === '/Minting/DNFTCharacterTicket'
+                    ? 'text-primary'
+                    : ''
                 }`}
                 endContent={icons.chevron}
                 radius='sm'

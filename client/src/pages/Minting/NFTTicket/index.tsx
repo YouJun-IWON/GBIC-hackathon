@@ -41,6 +41,8 @@ import NFTImageUpload from '@/components/ImageUploadNFT/ImageUpload';
 //   };
 // }
 
+//! 입력값 확인 다 하자 
+
 const ERC1155 = (props: { seriesId: any }) => {
   const seriesid = props.seriesId;
 
