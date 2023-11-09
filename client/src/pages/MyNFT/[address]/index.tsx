@@ -58,7 +58,7 @@ const Profile = (props: { transaction: any }) => {
 
   const userNFTData = Object.keys(profile)
   .filter(key => key !== "0")
-  .map(key => (profile[key] ));
+  // .map(key => (profile[key] ));
   
   
 
