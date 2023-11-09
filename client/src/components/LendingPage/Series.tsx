@@ -72,23 +72,15 @@ const Series = () => {
     <section className='2xl:max-container relative flex flex-col py-10 lg:mb-10 lg:py-20 '>
       <div className='hide-scrollbar sm:flex hidden h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[400px] xl:h-[640px]'>
         <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+          modules={[A11y]}
           spaceBetween={50}
           slidesPerView={3}
-          navigation
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-          pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
           className='h-full w-full '
         >
           <SwiperSlide>
             <SeriesSite
               backgroundImage='bg-bg-img-1'
-              title='인천 캠핑장 스탬프 코스!'
+              title='NFT Ticket'
               subtitle='Series 1'
               peopleJoined='40+ 참여중'
               num='1'
@@ -110,15 +102,6 @@ const Series = () => {
               subtitle='Series 3'
               peopleJoined='20+ 참여중'
               num='3'
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SeriesSite
-              backgroundImage='bg-bg-img-3'
-              title='인천 박물관 스템프 이벤트'
-              subtitle='Series 4'
-              peopleJoined='50+ 참여중'
-              num='4'
             />
           </SwiperSlide>
         </Swiper>

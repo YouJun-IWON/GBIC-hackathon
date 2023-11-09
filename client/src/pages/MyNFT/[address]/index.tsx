@@ -8,46 +8,48 @@ import { Card, CardBody, CardFooter, Progress } from '@nextui-org/react';
 import Link from 'next/link';
 import { testUser } from '@/constants';
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  console.log('getServerSide33', context.params?.address);
-  let userInfo: any = '';
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//   console.log('getServerSide33', context.params?.address);
+//   let userInfo: any = '';
 
-  try {
-    // Send GET request using axios
-    const response = await axios.get(
-      `http://13.232.70.72:80/user?account=${context.params?.address}`
-    );
-    console.log(response);
+//   try {
+//     // Send GET request using axios
+//     const response = await axios.get(
+//       `http://13.232.70.72:80/user?account=${context.params?.address}`
+//     );
+//     console.log(response);
 
-    // Access the response data
-    userInfo = response.data;
-    console.log(response.data);
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    userInfo = null;
-  }
+//     // Access the response data
+//     userInfo = response.data;
+//     console.log(response.data);
+//   } catch (error) {
+//     console.error('Error fetching user profile:', error);
+//     userInfo = null;
+//   }
 
-  // const transaction = await fetch(
-  //   `http://13.232.70.72:80/series?id=${context.params?.seriesID}`
-  // )
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     if (!data.items) {
-  //       context.res.writeHead(302, { Location: '/item_not_exist ' });
-  //       context.res.end();
-  //       return;
-  //     }
-  //     return data.items;
-  //   });
+//   // const transaction = await fetch(
+//   //   `http://13.232.70.72:80/series?id=${context.params?.seriesID}`
+//   // )
+//   //   .then((res) => res.json())
+//   //   .then((data) => {
+//   //     if (!data.items) {
+//   //       context.res.writeHead(302, { Location: '/item_not_exist ' });
+//   //       context.res.end();
+//   //       return;
+//   //     }
+//   //     return data.items;
+//   //   });
 
-  return {
-    props: { transaction: { ...userInfo } },
-  };
-}
+//   return {
+//     props: { transaction: { ...userInfo } },
+//   };
+// }
+
 const Profile = (props: { transaction: any }) => {
   console.log('testUser', testUser);
 
-  const profile = props.transaction;
+  // const profile = props.transaction;
+  const profile = testUser;
 
   console.log('profile', profile);
   let NFTCount = 0;

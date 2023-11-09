@@ -16,31 +16,31 @@ import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 import dayjs from 'dayjs';
 import confetti from 'canvas-confetti';
-import { mintData } from '../../helpers/dataschema';
+import { mintData } from '../../../helpers/dataschema';
 import { ThirdwebStorage } from '@thirdweb-dev/storage';
 import { useStorage } from '@thirdweb-dev/react';
 import { seriesMintInfo } from '@/constants/category';
 
-export async function getServerSideProps() {
-  let seriesId;
+// export async function getServerSideProps() {
+//   let seriesId;
 
-  try {
-    // Send GET request using axios
-    const response = await axios.get(`http://13.232.70.72:80/series/last`);
-    console.log('resdewdeponse', response.data);
+//   try {
+//     // Send GET request using axios
+//     const response = await axios.get(`http://13.232.70.72:80/series/last`);
+//     console.log('resdewdeponse', response.data);
 
-    // Access the response data
-    seriesId = response.data.Id;
-    console.log(response.data);
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    seriesId = null;
-  }
+//     // Access the response data
+//     seriesId = response.data.Id;
+//     console.log(response.data);
+//   } catch (error) {
+//     console.error('Error fetching user profile:', error);
+//     seriesId = null;
+//   }
 
-  return {
-    props: { seriesId: { ...seriesId } },
-  };
-}
+//   return {
+//     props: { seriesId: { ...seriesId } },
+//   };
+// }
 
 const ERC1155 = (props: { seriesId: any }) => {
   const seriesid = props.seriesId;
@@ -240,7 +240,7 @@ const ERC1155 = (props: { seriesId: any }) => {
       <section className='bg-white '>
         <div className='py-8 px-4 mx-auto max-w-2xl lg:py-16'>
           <h2 className='mb-4 text-4xl font-bold text-center text-gray-900'>
-            Register My Series using ERC1155 in Polygon
+            Register My DNFT Stamp Ticket
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label className='block mb-2 text-xl font-bold text-gray-900 text-center border-t-5 pt-4 border-green-500 border-double'>

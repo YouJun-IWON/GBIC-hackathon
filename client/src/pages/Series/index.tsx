@@ -4,28 +4,30 @@ import MainSeries from '@/components/SeriesPage/MainSeries';
 import { ExampleSeries } from '@/constants';
 import axios from 'axios';
 
-export async function getServerSideProps() {
-  let allSeries: any = '';
+// export async function getServerSideProps() {
+//   let allSeries: any = '';
 
-  try {
-    const response = await axios.get(`http://13.232.70.72:80/series/all`);
-    console.log(response);
+//   try {
+//     const response = await axios.get(`http://13.232.70.72:80/series/all`);
+//     console.log(response);
 
-    // Access the response data
-    allSeries = response.data;
-    console.log(response.data);
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    allSeries = null;
-  }
+//     // Access the response data
+//     allSeries = response.data;
+//     console.log(response.data);
+//   } catch (error) {
+//     console.error('Error fetching user profile:', error);
+//     allSeries = null;
+//   }
 
-  return {
-    props: { transaction: { ...allSeries } },
-  };
-}
+//   return {
+//     props: { transaction: { ...allSeries } },
+//   };
+// }
 
 const index = (props: { transaction: any }) => {
   const allSeries = props.transaction;
+
+  // const allSeries = ExampleSeries[0];
 
   // console.log('transaction', allSeries);
 
