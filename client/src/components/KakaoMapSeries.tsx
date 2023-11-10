@@ -1,5 +1,4 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { IncheonSeriesExample } from '../constants';
 
 interface KakaoMapProps {
   latitude1?: number | string;

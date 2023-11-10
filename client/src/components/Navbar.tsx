@@ -39,13 +39,23 @@ export default function App() {
   const pathName = usePathname();
   console.log(pathName);
 
+
+  // const icons = {
+  //   chevron: <ChevronDown fill='currentColor' size={16} />,
+  //   scale: <Scale className='text-warning' fill='currentColor' size={30} />,
+
+  //   activity: <Activity className='text-secondary' fill='green' size={30} />,
+
+  //   user: <TagUser className='text-danger' fill='purple' size={30} />,
+  // };
+
   const icons = {
     chevron: <ChevronDown fill='currentColor' size={16} />,
-    scale: <Scale className='text-warning' fill='currentColor' size={30} />,
+    scale: <span className='text-5xl'>🎫</span>,
 
-    activity: <Activity className='text-secondary' fill='green' size={30} />,
+    activity: <span className='text-5xl'>🕹️</span>,
 
-    user: <TagUser className='text-danger' fill='purple' size={30} />,
+    user:  <span className='text-5xl'>👻</span>,
   };
 
   const { data: session, status } = useSession();
@@ -253,7 +263,7 @@ export default function App() {
                 onPress={() => {
                   router.push(`/MyNFT/${session?.user && user.address}`);
                 }}
-                key='logout'
+                key='MyNFT'
                 color='secondary'
                 as={Button}
                 href={`/MyNFT/${session?.user && user.address}`}
@@ -267,7 +277,7 @@ export default function App() {
                 onPress={() => {
                   router.push(`/MySeries/${session?.user && user.address}`);
                 }}
-                key='logout'
+                key='MySeries'
                 color='success'
                 as={Button}
                 href={`/MySeries/${session?.user && user.address}`}
