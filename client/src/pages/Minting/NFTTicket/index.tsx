@@ -19,13 +19,14 @@ import { useStorage } from '@thirdweb-dev/react';
 import { seriesMintInfo } from '@/constants/category';
 import NFTImageUpload from '@/components/ImageUploadNFT/ImageUpload';
 import { mintDataNFT } from '@/helpers/dataschemaNFT';
+import GoogleMaps from '@/components/GoogleMap';
 
 // export async function getServerSideProps() {
 //   let seriesId;
 
 //   try {
 //     // Send GET request using axios
-//     const response = await axios.get(`http://13.232.70.72:80/series/last`);
+//     const response = await axios.get(`http://3.110.48.189:80/series/last`);
 //     console.log('resdewdeponse', response.data);
 
 //     // Access the response data
@@ -179,23 +180,22 @@ const ERC1155 = (props: { seriesId: any }) => {
     // const res = await storage?.upload(objects);
     // console.log('res', res);
 
-    //! axios
-    //   .post('http://13.232.70.72:80/mint-series', plusAddress)
-    //   .then((response: any) => {
-    //     toast.success('ERC1155 NFT Mint 완료');
-    //     router.push(`/Series/${response.data.seriesId}`);
-    //   })
-    //   .catch((err) => {
-    //     toast.error(`error: ${err}`);
-
-    //     console.error(err);
-    //   })
-    //   .finally(() => {
-    //     setIsLoading(false);
-    //   });
+    axios
+      .post('http://3.110.48.189:80/mint-series', plusAddress)
+      .then((response: any) => {
+        toast.success('ERC1155 NFT Mint 완료');
+        router.push(`/Series/${response.data.seriesId}`);
+      })
+      .catch((err) => {
+        toast.error(`error: ${err}`);
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
 
     // try {
-    //   const response = await fetch('http://13.232.70.72:80/mint-series', {
+    //   const response = await fetch('http://3.110.48.189:80/mint-series', {
     //     method: 'POST',
     //     headers: {
     //       'Content-Type': 'application/json',
@@ -215,6 +215,10 @@ const ERC1155 = (props: { seriesId: any }) => {
   };
 
   const imageSrc = watch('imageSrc');
+
+  const firstStampAddress = watch('firstStampAddress');
+  const firstStampLat = watch('firstStampLat');
+  const firstStampLot = watch('firstStampLot');
 
   const setCustomValue = (id: string, value: string[]) => {
     setValue(id, value);
@@ -480,6 +484,24 @@ const ERC1155 = (props: { seriesId: any }) => {
                     * 2 ~ 1000 자까지 기입 가능합니다.
                   </p>
                 )}
+              </div>
+
+              <div className='sm:col-span-2'>
+                <label
+                  htmlFor='googleMaps'
+                  className='block mb-2 text-md font-medium text-gray-900 mt-3'
+                >
+                  NFT 위치 설정
+                </label>
+
+                <GoogleMaps
+                  id='1'
+                  showSearch={true}
+                  latitude={firstStampLat}
+                  longitude={firstStampLot}
+                  setCustomValue={setCustomValue}
+                  detailAddress={firstStampAddress}
+                />
               </div>
             </div>
 

@@ -21,6 +21,18 @@ export const mintDataNFT = ({ data, id }: any) => {
         description: data.stampBoardDesc.toString(),
         attributes: [
           {
+            trait_type: 'Latitude',
+            value: data.firstStampLat,
+          },
+          {
+            trait_type: 'Longitude',
+            value: data.firstStampLot,
+          },
+          {
+            trait_type: 'Address',
+            value: data.firstStampAddress,
+          },
+          {
             trait_type: 'Series',
             value: data.series,
           },

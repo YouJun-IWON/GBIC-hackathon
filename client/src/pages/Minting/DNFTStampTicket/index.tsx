@@ -26,7 +26,7 @@ import { seriesMintInfo } from '@/constants/category';
 
 //   try {
 //     // Send GET request using axios
-//     const response = await axios.get(`http://13.232.70.72:80/series/last`);
+//     const response = await axios.get(`http://3.110.48.189:80/series/last`);
 //     console.log('resdewdeponse', response.data);
 
 //     // Access the response data
@@ -178,7 +178,7 @@ const ERC1155 = (props: { seriesId: any }) => {
     // console.log('res', res);
 
     axios
-      .post('http://13.232.70.72:80/mint-series', plusAddress)
+      .post('http://3.110.48.189:80/mint-series', plusAddress)
       .then((response: any) => {
         toast.success('ERC1155 NFT Mint 완료');
         router.push(`/Series/${response.data.seriesId}`);
@@ -193,7 +193,7 @@ const ERC1155 = (props: { seriesId: any }) => {
       });
 
     // try {
-    //   const response = await fetch('http://13.232.70.72:80/mint-series', {
+    //   const response = await fetch('http://3.110.48.189:80/mint-series', {
     //     method: 'POST',
     //     headers: {
     //       'Content-Type': 'application/json',

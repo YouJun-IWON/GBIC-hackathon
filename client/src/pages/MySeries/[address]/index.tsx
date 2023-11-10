@@ -7,65 +7,73 @@ import axios from 'axios';
 import { Card, CardBody, CardFooter, Progress } from '@nextui-org/react';
 import Link from 'next/link';
 import { testUser } from '@/constants';
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@nextui-org/react';
 
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  console.log('getServerSide33', context.params?.address);
+  let userInfo: any = '';
 
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//   console.log('getServerSide33', context.params?.address);
-//   let userInfo: any = '';
+  try {
+    // Send GET request using axios
+    const response = await axios.get(
+      `http://3.110.48.189:80/myseries?account=${context.params?.address}`
+    );
+    console.log(response);
 
-//   try {
-//     // Send GET request using axios
-//     const response = await axios.get(
-//       `http://13.232.70.72:80/user?account=${context.params?.address}`
-//     );
-//     console.log(response);
+    // Access the response data
+    userInfo = response.data;
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    userInfo = null;
+  }
 
-//     // Access the response data
-//     userInfo = response.data;
-//     console.log(response.data);
-//   } catch (error) {
-//     console.error('Error fetching user profile:', error);
-//     userInfo = null;
-//   }
+  // const transaction = await fetch(
+  //   `http://3.110.48.189:80/series?id=${context.params?.seriesID}`
+  // )
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     if (!data.items) {
+  //       context.res.writeHead(302, { Location: '/item_not_exist ' });
+  //       context.res.end();
+  //       return;
+  //     }
+  //     return data.items;
+  //   });
 
-//   // const transaction = await fetch(
-//   //   `http://13.232.70.72:80/series?id=${context.params?.seriesID}`
-//   // )
-//   //   .then((res) => res.json())
-//   //   .then((data) => {
-//   //     if (!data.items) {
-//   //       context.res.writeHead(302, { Location: '/item_not_exist ' });
-//   //       context.res.end();
-//   //       return;
-//   //     }
-//   //     return data.items;
-//   //   });
-
-//   return {
-//     props: { transaction: { ...userInfo } },
-//   };
-// }
+  return {
+    props: { transaction: { userInfo } },
+  };
+}
 
 const Profile = (props: { transaction: any }) => {
-  console.log('testUser', testUser);
+  
+  const profile = props.transaction;
 
-  // const profile = props.transaction;
-  const profile = testUser;
-
-  console.log('profile', profile);
+  console.log('profile', profile.userInfo.type0);
   let NFTCount = 0;
 
-  const profileData = profile[0];
+  const userNFTData = profile.userInfo.type0;
+  const userDNFTData1 = profile.userInfo.type1;
+  const userDNFTData2 = profile.userInfo.type2;
 
-  const userNFTData = Object.keys(profile)
-    .filter((key) => key !== '0')
-    .map((key: any) => profile[key]);
+  const totalSeries = userNFTData.length + userDNFTData1.length + userDNFTData2.length 
 
-  userNFTData.map((item: any) => (NFTCount += item.data.length));
+  // const userNFTData = Object.keys(profile)
+  //   .filter((key) => key !== '0')
+  //   .map((key: any) => profile[key]);
 
-  console.log('profileData', profileData);
-  console.log('userNFTData', userNFTData);
+  // userNFTData.map((item: any) => (NFTCount += item.data.length));
+
+  console.log('profileData', userNFTData);
+  // console.log('userNFTData', userNFTData);
 
   //! offcanvas
   // const [isOpen, setIsOpen] = useState(false);
@@ -80,33 +88,21 @@ const Profile = (props: { transaction: any }) => {
         </div>
         <div className='space-y-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-12 md:space-y-0'>
           <div className='border-2 p-5 rounded-2xl shadow-xl '>
-            <h3 className='mb-2 text-xl  font-bold '>
-              발행한 시리즈 개수
-            </h3>
+            <h3 className='mb-2 text-xl  font-bold '>발행한 시리즈 개수</h3>
 
-            <p className='text-gray-500 text-xl'>23</p>
-           
+            <p className='text-gray-500 text-xl'>{totalSeries}</p>
           </div>
           <div className='border-2 p-5 rounded-2xl shadow-xl'>
-            <h3 className='mb-2 text-xl font-bold  '>
-              Mint한 NFT 개수
-            </h3>
-            <p className='text-gray-500 text-xl '>23</p>
-           
+            <h3 className='mb-2 text-xl font-bold  '>Mint한 NFT 개수</h3>
+            <p className='text-gray-500 text-xl '>480</p>
           </div>
           <div className='border-2 p-5 rounded-2xl shadow-xl'>
-            <h3 className='mb-2 text-xl font-bold  '>
-              총 참여자 수
-            </h3>
+            <h3 className='mb-2 text-xl font-bold  '>총 참여자 수</h3>
             <p className='text-gray-500 text-xl '>23</p>
-          
           </div>
           <div className='border-2 p-5 rounded-2xl shadow-xl'>
-            <h3 className='mb-2 text-xl font-bold  '>
-              행위 인증 수
-            </h3>
-            <p className='text-gray-500 text-xl '>23</p>
-            
+            <h3 className='mb-2 text-xl font-bold  '>행위 인증 수</h3>
+            <p className='text-gray-500 text-xl '>2</p>
           </div>
         </div>
       </section>
@@ -143,8 +139,7 @@ const Profile = (props: { transaction: any }) => {
                               Series {item.seriesInfo.series / 10} 참여율
                             </p>
                             <p className='text-lg '>
-                              (총 50개){' '}
-                              {((item.data.length - 1) * 100) / 4}%
+                              (총 50개) {((item.data.length - 1) * 100) / 4}%
                             </p>
                           </div>
                           <Progress
@@ -162,8 +157,6 @@ const Profile = (props: { transaction: any }) => {
                             size='md'
                             value={((item.data.length - 1) * 100) / 4}
                           />
-
-                          
                         </div>
                       </CardFooter>
                     </Card>
@@ -229,7 +222,7 @@ const Profile = (props: { transaction: any }) => {
             </span>
             <div className='py-10 text-center'>
               <div className='flex flex-wrap w-full justify-around px-4 gap-10 '>
-                {userNFTData?.map((item: any, index: any) => (
+                {userDNFTData1?.map((item: any, index: any) => (
                   <div className='relative flex justify-center' key={index}>
                     <Card
                       shadow='lg'
@@ -252,8 +245,7 @@ const Profile = (props: { transaction: any }) => {
                               Series {item.seriesInfo.series / 10} 참여율
                             </p>
                             <p className='text-lg '>
-                              (총 100개){' '}
-                              {((item.data.length - 1) * 100) / 4}%
+                              (총 100개) {((item.data.length - 1) * 100) / 4}%
                             </p>
                           </div>
                           <Progress
@@ -271,25 +263,27 @@ const Profile = (props: { transaction: any }) => {
                             size='md'
                             value={((item.data.length - 1) * 100) / 4}
                           />
-                          <Table removeWrapper aria-label="Example static collection table">
-      <TableHeader>
-        <TableColumn>Board</TableColumn>
-        <TableColumn>Stamp1</TableColumn>
-        <TableColumn>Stamp2</TableColumn>
-        <TableColumn>Stamp4</TableColumn>
-        <TableColumn>Stamp5</TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow key="1">
-          <TableCell>25</TableCell>
-          <TableCell>10</TableCell>
-          <TableCell>5</TableCell><TableCell>6</TableCell>
-          <TableCell>9</TableCell>
-        </TableRow>
-      
-      
-      </TableBody>
-    </Table>
+                          <Table
+                            removeWrapper
+                            aria-label='Example static collection table'
+                          >
+                            <TableHeader>
+                              <TableColumn>Board</TableColumn>
+                              <TableColumn>Stamp1</TableColumn>
+                              <TableColumn>Stamp2</TableColumn>
+                              <TableColumn>Stamp4</TableColumn>
+                              <TableColumn>Stamp5</TableColumn>
+                            </TableHeader>
+                            <TableBody>
+                              <TableRow key='1'>
+                                <TableCell>25</TableCell>
+                                <TableCell>10</TableCell>
+                                <TableCell>5</TableCell>
+                                <TableCell>6</TableCell>
+                                <TableCell>9</TableCell>
+                              </TableRow>
+                            </TableBody>
+                          </Table>
                         </div>
                       </CardFooter>
                     </Card>
@@ -355,7 +349,7 @@ const Profile = (props: { transaction: any }) => {
             </span>
             <div className='py-10 text-center'>
               <div className='flex flex-wrap w-full justify-around px-4 gap-10 '>
-                {userNFTData?.map((item: any, index: any) => (
+                {userDNFTData2?.map((item: any, index: any) => (
                   <div className='relative flex justify-center' key={index}>
                     <Card
                       shadow='lg'
@@ -378,8 +372,7 @@ const Profile = (props: { transaction: any }) => {
                               Series {item.seriesInfo.series / 10} 참여율
                             </p>
                             <p className='text-lg '>
-                              (총 100개){' '}
-                              {((item.data.length - 1) * 100) / 4}%
+                              (총 100개) {((item.data.length - 1) * 100) / 4}%
                             </p>
                           </div>
                           <Progress
@@ -397,31 +390,33 @@ const Profile = (props: { transaction: any }) => {
                             size='md'
                             value={((item.data.length - 1) * 100) / 4}
                           />
-                           <Table removeWrapper aria-label="Example static collection table">
-      <TableHeader>
-        <TableColumn>Lev. 1</TableColumn>
-        <TableColumn>Lev. 2</TableColumn>
-        <TableColumn>Lev. 3</TableColumn>
-        <TableColumn>Lev. 4</TableColumn>
-        <TableColumn>Lev. 5</TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow key="1">
-          <TableCell>25</TableCell>
-          <TableCell>10</TableCell>
-          <TableCell>5</TableCell><TableCell>6</TableCell>
-          <TableCell>9</TableCell>
-        </TableRow>
-      
-      
-      </TableBody>
-    </Table>
+                          <Table
+                            removeWrapper
+                            aria-label='Example static collection table'
+                          >
+                            <TableHeader>
+                              <TableColumn>Lev. 1</TableColumn>
+                              <TableColumn>Lev. 2</TableColumn>
+                              <TableColumn>Lev. 3</TableColumn>
+                              <TableColumn>Lev. 4</TableColumn>
+                              <TableColumn>Lev. 5</TableColumn>
+                            </TableHeader>
+                            <TableBody>
+                              <TableRow key='1'>
+                                <TableCell>25</TableCell>
+                                <TableCell>10</TableCell>
+                                <TableCell>5</TableCell>
+                                <TableCell>6</TableCell>
+                                <TableCell>9</TableCell>
+                              </TableRow>
+                            </TableBody>
+                          </Table>
                         </div>
                       </CardFooter>
                     </Card>
 
                     <div
-                      className='absolute grid grid-rows-2 grid-cols-2 gap-9 top-24'
+                      className='absolute grid grid-cols-4 gap-2 bottom-40'
                       draggable='false'
                     >
                       {item.data[1] ? (
