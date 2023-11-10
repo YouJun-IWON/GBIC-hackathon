@@ -14,11 +14,11 @@ import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 import dayjs from 'dayjs';
 import confetti from 'canvas-confetti';
-import { mintData } from '../../../helpers/dataschema';
 import { ThirdwebStorage } from '@thirdweb-dev/storage';
 import { useStorage } from '@thirdweb-dev/react';
 import { seriesMintInfo } from '@/constants/category';
 import NFTImageUpload from '@/components/ImageUploadNFT/ImageUpload';
+import { mintDataNFT } from '@/helpers/dataschemaNFT';
 
 // export async function getServerSideProps() {
 //   let seriesId;
@@ -41,7 +41,7 @@ import NFTImageUpload from '@/components/ImageUploadNFT/ImageUpload';
 //   };
 // }
 
-//! 입력값 확인 다 하자 
+//! 입력값 확인 다 하자
 
 const ERC1155 = (props: { seriesId: any }) => {
   const seriesid = props.seriesId;
@@ -150,16 +150,17 @@ const ERC1155 = (props: { seriesId: any }) => {
     console.log(user.address);
     setIsLoading(true);
     console.log('data', data);
-    const result = mintData((data = { data }));
-    console.log('result', result.data[0]);
+    const result = mintDataNFT((data = { data }));
+
     toast.info('IPFS 업로드 준비중');
     const objects = [
       result.data[0],
-      result.data[1],
-      result.data[2],
-      result.data[3],
-      result.data[4],
+      // result.data[1],
+      // result.data[2],
+      // result.data[3],
+      // result.data[4],
     ];
+
     const base = 'https://c6b8e7180c3c42db758973559ad7f50d.ipfscdn.io/ipfs';
     const jsonUris = await storage.uploadBatch(objects);
 
@@ -178,20 +179,20 @@ const ERC1155 = (props: { seriesId: any }) => {
     // const res = await storage?.upload(objects);
     // console.log('res', res);
 
-    axios
-      .post('http://13.232.70.72:80/mint-series', plusAddress)
-      .then((response: any) => {
-        toast.success('ERC1155 NFT Mint 완료');
-        router.push(`/Series/${response.data.seriesId}`);
-      })
-      .catch((err) => {
-        toast.error(`error: ${err}`);
+    //! axios
+    //   .post('http://13.232.70.72:80/mint-series', plusAddress)
+    //   .then((response: any) => {
+    //     toast.success('ERC1155 NFT Mint 완료');
+    //     router.push(`/Series/${response.data.seriesId}`);
+    //   })
+    //   .catch((err) => {
+    //     toast.error(`error: ${err}`);
 
-        console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    //     console.error(err);
+    //   })
+    //   .finally(() => {
+    //     setIsLoading(false);
+    //   });
 
     // try {
     //   const response = await fetch('http://13.232.70.72:80/mint-series', {
@@ -219,22 +220,6 @@ const ERC1155 = (props: { seriesId: any }) => {
     setValue(id, value);
     console.log('this is', value);
   };
-
-  const firstStampAddress = watch('firstStampAddress');
-  const firstStampLat = watch('firstStampLat');
-  const firstStampLot = watch('firstStampLot');
-
-  const secondStampAddress = watch('secondStampAddress');
-  const secondStampLat = watch('secondStampLat');
-  const secondStampLot = watch('secondStampLot');
-
-  const thirdStampAddress = watch('thirdStampAddress');
-  const thirdStampLat = watch('thirdStampLat');
-  const thirdStampLot = watch('thirdStampLot');
-
-  const fourthStampAddress = watch('fourthStampAddress');
-  const fourthStampLat = watch('fourthStampLat');
-  const fourthStampLot = watch('fourthStampLot');
 
   return (
     <>
@@ -517,7 +502,7 @@ const ERC1155 = (props: { seriesId: any }) => {
                 다음에 동의합니다.{' '}
               </label>
               <span className='ml-2 text-sm font-medium text-gray-900 '>
-                <Modals onClick={setIsChecked} color={0}/>
+                <Modals onClick={setIsChecked} color={0} />
               </span>
             </div>
             {errors.checkbox && (

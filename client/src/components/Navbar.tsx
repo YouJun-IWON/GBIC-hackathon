@@ -25,7 +25,7 @@ import {
 } from './Icons';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { NAV_LINKS } from '@/constants';
+import { NAV_LINKS, NAV_LINKS_Small } from '@/constants';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
@@ -141,7 +141,7 @@ export default function App() {
               }}
               startContent={icons.scale}
             >
-              NFT Ticket
+              <span className='text-lg'>NFT Ticket</span>
             </DropdownItem>
             <DropdownItem
               key='usage_metrics'
@@ -151,7 +151,7 @@ export default function App() {
                 router.push('/Minting/DNFTStampTicket');
               }}
             >
-              Stamp DNFT Ticket
+              <span className='text-lg'> Stamp DNFT Ticket</span>
             </DropdownItem>
 
             <DropdownItem
@@ -162,7 +162,7 @@ export default function App() {
                 router.push('/Minting/DNFTCharacterTicket');
               }}
             >
-              Character DNFT Ticket
+              <span className='text-lg'>Character DNFT Ticket</span>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
@@ -197,7 +197,7 @@ export default function App() {
             {NAV_LINKS[2].label}
           </Link>
         </NavbarItem>
-        <NavbarItem
+        {/* <NavbarItem
           isActive={pathName === `/MyNFT/${session?.user && user.address}`}
         >
           <Link
@@ -211,6 +211,20 @@ export default function App() {
             {NAV_LINKS[3].label}
           </Link>
         </NavbarItem>
+        <NavbarItem
+          isActive={pathName === `/MySeries/${session?.user && user.address}`}
+        >
+          <Link
+            color={`${
+              pathName === `/MySeries/${session?.user && user.address}`
+                ? 'primary'
+                : 'foreground'
+            }`}
+            href={`/MySeries/${session?.user && user.address}`}
+          >
+            {NAV_LINKS[5].label}
+          </Link>
+        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify='end'>
         {session?.user ? (
@@ -220,7 +234,7 @@ export default function App() {
                 isBordered
                 as='button'
                 className='transition-transform'
-                color='secondary'
+                color='primary'
                 name='Jason Hughes'
                 size='sm'
                 src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
@@ -234,6 +248,33 @@ export default function App() {
                 </p>
               </DropdownItem>
               <DropdownItem key='settings'>{blockchain}</DropdownItem>
+
+              <DropdownItem
+                onPress={() => {
+                  router.push(`/MyNFT/${session?.user && user.address}`);
+                }}
+                key='logout'
+                color='secondary'
+                as={Button}
+                href={`/MyNFT/${session?.user && user.address}`}
+                className='text-secondary-500 bg-transparent text-start'
+              >
+                My NFT
+              </DropdownItem>
+
+
+              <DropdownItem
+                onPress={() => {
+                  router.push(`/MySeries/${session?.user && user.address}`);
+                }}
+                key='logout'
+                color='success'
+                as={Button}
+                href={`/MySeries/${session?.user && user.address}`}
+                className='text-green-600 bg-transparent text-start'
+              >
+                My Series
+              </DropdownItem>
 
               <DropdownItem
                 onPress={() => {
@@ -264,14 +305,14 @@ export default function App() {
         )}
       </NavbarContent>
       <NavbarMenu>
-        {NAV_LINKS.map((item, index) => (
+        {NAV_LINKS_Small.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={`${
-                pathName === NAV_LINKS[index].href ? 'primary' : 'foreground'
+                pathName === NAV_LINKS_Small[index].href ? 'primary' : 'foreground'
               }`}
               className='w-full'
-              href={NAV_LINKS[index].href}
+              href={NAV_LINKS_Small[index].href}
               size='lg'
             >
               {item.label}

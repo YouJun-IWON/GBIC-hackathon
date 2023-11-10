@@ -7,6 +7,8 @@ import axios from 'axios';
 import { Card, CardBody, CardFooter, Progress } from '@nextui-org/react';
 import Link from 'next/link';
 import { testUser } from '@/constants';
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
+
 
 // export async function getServerSideProps(context: GetServerSidePropsContext) {
 //   console.log('getServerSide33', context.params?.address);
@@ -70,102 +72,53 @@ const Profile = (props: { transaction: any }) => {
 
   return (
     <div className='bg-white '>
-      <section className='relative block h-[50vh]'>
-        <div className='absolute top-0 h-full w-full'>
-          <Image
-            src='/my.png'
-            alt='Background Image'
-            fill
-          />
+      <section className='py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6'>
+        <div className='max-w-screen-md mb-8 lg:mb-16'>
+          <h2 className='mb-4 text-4xl tracking-tight font-extrabold text-gray-900 '>
+            내가 만든 (D)NFT Ticket 을 쉽고 빠르게 관리하세요.
+          </h2>
         </div>
-        <div className='absolute top-0 h-full w-full bg-black/20 bg-cover bg-center' />
+        <div className='space-y-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-12 md:space-y-0'>
+          <div className='border-2 p-5 rounded-2xl shadow-xl '>
+            <h3 className='mb-2 text-xl  font-bold '>
+              발행한 시리즈 개수
+            </h3>
+
+            <p className='text-gray-500 text-xl'>23</p>
+           
+          </div>
+          <div className='border-2 p-5 rounded-2xl shadow-xl'>
+            <h3 className='mb-2 text-xl font-bold  '>
+              Mint한 NFT 개수
+            </h3>
+            <p className='text-gray-500 text-xl '>23</p>
+           
+          </div>
+          <div className='border-2 p-5 rounded-2xl shadow-xl'>
+            <h3 className='mb-2 text-xl font-bold  '>
+              총 참여자 수
+            </h3>
+            <p className='text-gray-500 text-xl '>23</p>
+          
+          </div>
+          <div className='border-2 p-5 rounded-2xl shadow-xl'>
+            <h3 className='mb-2 text-xl font-bold  '>
+              행위 인증 수
+            </h3>
+            <p className='text-gray-500 text-xl '>23</p>
+            
+          </div>
+        </div>
       </section>
-      <section className='relative py-16 bg-blue-gray-50/50 sm:px-4'>
-        <div className=' mx-auto'>
-          <div className='relative mb-6 -mt-64 flex w-full min-w-0 flex-col break-words rounded-3xl bg-white shadow-lg shadow-gray-300 '>
-            <div className='flex flex-wrap justify-center'>
-              <div className='flex w-full justify-center px-4 lg:order-2 lg:w-3/12'>
-                <div className='relative'>
-                  <div className='-mt-40 w-50 mx-auto'>
-                    <Image
-                      className='rounded-full'
-                      src='https://i.pravatar.cc/150?u=a04258a2462d826712d'
-                      alt='Rounded avatar'
-                      width={300}
-                      height={300}
-                    />
-                    {/* {profile.image ? (
-                        <Image
-                          className='rounded-full'
-                          src={`${profile.image}`}
-                          alt='Rounded avatar'
-                          width={300}
-                          height={300}
-                        />
-                      ) : (
-                        <>
-                          <svg
-                            className='w-60 mt-10 h-60 text-gray-800 dark:text-white'
-                            aria-hidden='true'
-                            xmlns='http://www.w3.org/2000/svg'
-                            fill='currentColor'
-                            viewBox='0 0 20 20'
-                          >
-                            <path d='M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z' />
-                          </svg>
-                        </>
-                      )} */}
-                  </div>
-                </div>
-              </div>
-              <div className='w-full px-4 lg:order-1 lg:w-4/12 text-lg'>
-                <div className='flex justify-center py-4 pt-8 lg:pt-4'>
-                  <div className='flex flex-col mr-4 p-3 text-center'>
-                    <span className='font-bold uppercase'>
-                      {userNFTData.length}
-                    </span>
-                    <span className='font-normal text-gray-500'>
-                      참여한 시리즈 수
-                    </span>
-                  </div>
-                  <div className='flex flex-col mr-4 p-3 text-center'>
-                    <span className='font-bold uppercase'>{NFTCount}</span>
-                    <span className='font-normal text-gray-500'>
-                      받은 NFT 개수
-                    </span>
-                  </div>
-                </div>
-              </div>
 
-              <div className='w-full px-4 lg:order-3 lg:w-4/12 text-lg'>
-                <div className='flex justify-center py-4 pt-8 lg:pt-4'>
-                  <div className='flex flex-col mr-4 p-3 text-center'>
-                    <span className='font-bold uppercase'>YouJun</span>
-                    <span className='font-normal text-gray-500'>닉네임</span>
-                  </div>
-                  <div className='flex flex-col mr-4 p-3 text-center'>
-                    <span className='font-bold uppercase'>User</span>
-                    <span className='font-normal text-gray-500'>Type</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='my-8 text-center'>
-              <h3 className='mb-2 font-semibold text-2xl'>YouJun</h3>
-              <div className='mb-10 mt-3 flex flex-col items-center justify-center gap-2'>
-                <span className='font-medium text-blue-gray-700'>
-                  {profileData.account}
-                </span>
-                <span className='font-normal text-blue-gray-500'>
-                  안녕하세요! 스탬프 NFT로 다양한 활동을 기획중인 교사입니다.
-                </span>
-              </div>
-            </div>
+      <section className='relative py-30 sm:px-4'>
+        <div className='mx-auto'>
+          <div className='relative my-20  flex w-full min-w-0 flex-col break-words rounded-3xl bg-white shadow-lg shadow-orange-300 border-2 border-orange-50 '>
+            <span className='absolute inset-0 text-4xl sm:text-5xl font-bold text-orange-50 -mt-11 ml-5'>
+              NFT Ticket
+            </span>
 
-            <div className='relative mb-20 border-t-3 border-orange-300 py-10 text-center'>
-<span className='absolute inset-0 -mt-11 text-4xl sm:text-5xl font-bold text-orange-400 left-3 text-start'>
-NFT Ticket
-</span>
+            <div className='py-10 text-center'>
               <div className='flex flex-wrap w-full justify-around px-4 gap-10 '>
                 {userNFTData?.map((item: any, index: any) => (
                   <div className='relative flex justify-center' key={index}>
@@ -187,9 +140,10 @@ NFT Ticket
                         <div className=' px-4 mx-auto w-full '>
                           <div className='flex justify-between'>
                             <p className='text-lg'>
-                              Series {item.seriesInfo.series / 10}
+                              Series {item.seriesInfo.series / 10} 참여율
                             </p>
                             <p className='text-lg '>
+                              (총 50개){' '}
                               {((item.data.length - 1) * 100) / 4}%
                             </p>
                           </div>
@@ -208,6 +162,8 @@ NFT Ticket
                             size='md'
                             value={((item.data.length - 1) * 100) / 4}
                           />
+
+                          
                         </div>
                       </CardFooter>
                     </Card>
@@ -265,11 +221,13 @@ NFT Ticket
                 ))}
               </div>
             </div>
+          </div>
 
-            <div className='relative mb-20 border-t-3 border-green-300 py-10 text-center'>
-            <span className='absolute inset-0 -mt-11 text-4xl sm:text-5xl font-bold text-green-400 left-3 text-start'>
-Stamp DNFT Ticket
-</span>
+          <div className='relative mb-20  flex w-full min-w-0 flex-col break-words rounded-3xl bg-white shadow-lg shadow-green-300 border-2 border-green-50 '>
+            <span className='absolute inset-0 text-4xl sm:text-5xl font-bold text-green-50 -mt-11 ml-5'>
+              Stamp DNFT Ticket
+            </span>
+            <div className='py-10 text-center'>
               <div className='flex flex-wrap w-full justify-around px-4 gap-10 '>
                 {userNFTData?.map((item: any, index: any) => (
                   <div className='relative flex justify-center' key={index}>
@@ -291,9 +249,10 @@ Stamp DNFT Ticket
                         <div className=' px-4 mx-auto w-full '>
                           <div className='flex justify-between'>
                             <p className='text-lg'>
-                              Series {item.seriesInfo.series / 10}
+                              Series {item.seriesInfo.series / 10} 참여율
                             </p>
                             <p className='text-lg '>
+                              (총 100개){' '}
                               {((item.data.length - 1) * 100) / 4}%
                             </p>
                           </div>
@@ -312,6 +271,25 @@ Stamp DNFT Ticket
                             size='md'
                             value={((item.data.length - 1) * 100) / 4}
                           />
+                          <Table removeWrapper aria-label="Example static collection table">
+      <TableHeader>
+        <TableColumn>Board</TableColumn>
+        <TableColumn>Stamp1</TableColumn>
+        <TableColumn>Stamp2</TableColumn>
+        <TableColumn>Stamp4</TableColumn>
+        <TableColumn>Stamp5</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow key="1">
+          <TableCell>25</TableCell>
+          <TableCell>10</TableCell>
+          <TableCell>5</TableCell><TableCell>6</TableCell>
+          <TableCell>9</TableCell>
+        </TableRow>
+      
+      
+      </TableBody>
+    </Table>
                         </div>
                       </CardFooter>
                     </Card>
@@ -369,13 +347,13 @@ Stamp DNFT Ticket
                 ))}
               </div>
             </div>
+          </div>
 
-
-
-            <div className='relative mb-10 border-t-3 border-purple-400 py-10 text-center'>
-            <span className='absolute inset-0 -mt-11 text-4xl sm:text-5xl font-bold text-purple-400 left-3 text-start'>
-Character DNFT Ticket
-</span>
+          <div className='relative mb-20  flex w-full min-w-0 flex-col break-words rounded-3xl bg-white shadow-lg shadow-purple-300 border-2 border-purple-500 '>
+            <span className='absolute inset-0 text-4xl sm:text-5xl font-bold text-purple-500 -mt-11 ml-5'>
+              Series DNFT Ticket
+            </span>
+            <div className='py-10 text-center'>
               <div className='flex flex-wrap w-full justify-around px-4 gap-10 '>
                 {userNFTData?.map((item: any, index: any) => (
                   <div className='relative flex justify-center' key={index}>
@@ -397,9 +375,10 @@ Character DNFT Ticket
                         <div className=' px-4 mx-auto w-full '>
                           <div className='flex justify-between'>
                             <p className='text-lg'>
-                              Series {item.seriesInfo.series / 10}
+                              Series {item.seriesInfo.series / 10} 참여율
                             </p>
                             <p className='text-lg '>
+                              (총 100개){' '}
                               {((item.data.length - 1) * 100) / 4}%
                             </p>
                           </div>
@@ -418,6 +397,25 @@ Character DNFT Ticket
                             size='md'
                             value={((item.data.length - 1) * 100) / 4}
                           />
+                           <Table removeWrapper aria-label="Example static collection table">
+      <TableHeader>
+        <TableColumn>Lev. 1</TableColumn>
+        <TableColumn>Lev. 2</TableColumn>
+        <TableColumn>Lev. 3</TableColumn>
+        <TableColumn>Lev. 4</TableColumn>
+        <TableColumn>Lev. 5</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow key="1">
+          <TableCell>25</TableCell>
+          <TableCell>10</TableCell>
+          <TableCell>5</TableCell><TableCell>6</TableCell>
+          <TableCell>9</TableCell>
+        </TableRow>
+      
+      
+      </TableBody>
+    </Table>
                         </div>
                       </CardFooter>
                     </Card>
@@ -475,10 +473,6 @@ Character DNFT Ticket
                 ))}
               </div>
             </div>
-
-
-
-
           </div>
         </div>
       </section>

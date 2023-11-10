@@ -20,8 +20,7 @@ const Hero = () => {
           Ticket Platform
         </span>
         <p className='regular-16 py-6 text-gray-30 xl:max-w-[520px]'>
-          일반적인 단일 NFT Ticket 부터 Stamp DNFT, 캐릭터 성장 DNFT
-          그 어떤 티켓 서비스 보다 자유롭고 저렴한, 그러나 강력한 보안을 가진 Ticket 생성, 참여, 관리 서비스를 제공합니다.
+          일반적인 NFT Ticket 부터 Stamp DNFT, 캐릭터 성장 DNFT까지, 그 어떤 티켓 서비스 보다 자유롭고 저렴한, 그러나 강력한 보안을 가진 Ticket 생성, 참여, 관리 서비스를 제공합니다.
         </p>
 
         <div className='my-8 flex flex-wrap gap-5'>
@@ -107,7 +106,7 @@ const Hero = () => {
                 height={24}
               />
             </div>
-            <p className='bold-18 text-white'>강화도 동막해수욕장</p>
+            <p className='bold-18 text-white'>성수동 팝업스토어</p>
           </div>
           <div className='flex flex-col'>
             <div className='flex flex-col'>

@@ -10,7 +10,7 @@ interface ImageUploadProps {
   value: string[];
 }
 
-const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
+const ImageUploadChar = ({ onChange, value }: ImageUploadProps) => {
   const handleUpload = (result: any) => {
     console.log('result:', result.info.secure_url);
     const updatedValue = Array.isArray(value)
@@ -64,7 +64,7 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
         
       </p>
       <p className='text-sm leading-relaxed text-slate-500 mt-1 '>
-        * 첫번째 사진이 스탬프 보드가 됩니다.
+        * 첫번째 사진부터 다섯번째 사진이 level 1 ~ 5 까지 순서대로 부여됩니다.
       </p>
 
       <label
@@ -215,117 +215,5 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
   );
 };
 
-export default ImageUpload;
+export default ImageUploadChar;
 
-// <div>
-// {value.length >= 2 && (
-//   <div style={{ display: 'flex' }}>
-//     {value.slice(1, 5).map((imageUrl, index) => (
-//       <div
-//         key={index}
-//         className='relative rounded-lg flex flex-col items-center justify-center p-20 transition border-2 border-dashed cursor-pointer border-neutral-300 text-neutral-300'
-//         style={{ width: 'calc(25% - 16px)', margin: '8px' }}
-//       >
-//         <div style={{ flex: 1 }} className='flex-1'>
-//           <Image
-//           className='rounded-lg'
-//             fill
-//             style={{
-//               objectFit: 'cover',
-//               width: '100%',
-//               height: '100%',
-//             }}
-//             src={imageUrl}
-//             alt=''
-//           />
-//         </div>
-//       </div>
-//     ))}
-//   </div>
-// )}
-// </div>
-
-{
-  /* <div className='flex mt-4'>
-        {value[1] && (
-          <div className='w-1/2'>
-            <div className='relative rounded-lg items-center mr-2 justify-center p-20 transition border-2 border-dashed  border-neutral-300 text-neutral-300 cursor-pointer hover:opacity-70 '>
-              <div>
-                <Image
-                  className='rounded-lg'
-                  fill
-                  style={{
-                    objectFit: 'cover',
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  src={value[1]}
-                  alt=''
-                />
-              </div>
-            </div>
-          </div>
-        )}
-        {value[2] && (
-          <div className='w-1/2'>
-            <div className='relative rounded-lg  items-center ml-2 justify-center p-20 transition border-2 border-dashed  border-neutral-300 text-neutral-300 cursor-pointer hover:opacity-70 '>
-              <div style={{ flex: 1 }}>
-                <Image
-                  className='rounded-lg'
-                  fill
-                  style={{
-                    objectFit: 'cover',
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  src={value[2]}
-                  alt=''
-                />
-              </div>
-            </div>
-          </div>
-        )}
-      </div> */
-}
-{
-  /* <div className='flex mt-4'>
-        {value[3] && (
-          <div className='w-1/2'>
-            <div className='relative rounded-lg items-center mr-2 justify-center p-20 transition border-2 border-dashed  border-neutral-300 text-neutral-300 cursor-pointer hover:opacity-70 '>
-              <div style={{ flex: 1 }}>
-                <Image
-                  className='rounded-lg'
-                  fill
-                  style={{
-                    objectFit: 'cover',
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  src={value[3]}
-                  alt=''
-                />
-              </div>
-            </div>
-          </div>
-        )}
-        {value[4] && (
-          <div className='w-1/2'>
-            <div className='relative rounded-lg  items-center ml-2 justify-center p-20 transition border-2 border-dashed  border-neutral-300 text-neutral-300 cursor-pointer hover:opacity-70 '>
-              <div style={{ flex: 1 }}>
-                <Image
-                  className='rounded-lg'
-                  fill
-                  style={{
-                    objectFit: 'cover',
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  src={value[4]}
-                  alt=''
-                />
-              </div>
-            </div>
-          </div>
-        )}
-      </div> */
-}

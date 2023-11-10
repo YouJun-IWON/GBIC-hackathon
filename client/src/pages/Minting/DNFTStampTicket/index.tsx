@@ -269,7 +269,7 @@ const ERC1155 = (props: { seriesId: any }) => {
                   className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5  ${
                     errors.title && 'border-rose-500'
                   }`}
-                  placeholder='영종도 맛집 탐방!'
+                  placeholder='빠르게 티켓 선점하고 LBank 해커톤에 참여하자!'
                 />
                 {errors.title?.message && (
                   <p className='text-sm leading-relaxed text-rose-500 dark:text-rose-500'>
@@ -293,7 +293,7 @@ const ERC1155 = (props: { seriesId: any }) => {
                   className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-400 focus:border-green-400 block w-full p-2.5  ${
                     errors.benefit && 'border-rose-500  '
                   }`}
-                  placeholder='지역문화상품권 10000원'
+                  placeholder='LBank 해커톤 참여권'
                 />
                 {errors.benefit?.message && (
                   <p className='text-sm leading-relaxed text-rose-500 dark:text-rose-500'>
@@ -452,7 +452,7 @@ const ERC1155 = (props: { seriesId: any }) => {
 
               <div className='col-span-2'>
                 <label className='block mb-2 text-xl font-bold text-gray-900 text-center border-t-5 pt-4 border-green-500 border-double'>
-                  2. NFT 정보 입력
+                  2. DNFT 정보 입력
                 </label>
 
                 <ImageUpload
@@ -487,7 +487,7 @@ const ERC1155 = (props: { seriesId: any }) => {
                   className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-400 focus:border-green-400  h-30 ${
                     errors.stampBoardDesc && 'border-rose-500 '
                   }`}
-                  placeholder='이번 Series에 대한 자세한 내용을 기입해주세요.'
+                  placeholder='이 NFT에 대한 자세한 내용을 기입해주세요.'
                 />
                 {errors.stampBoardDesc?.message ? (
                   <p className='text-sm leading-relaxed text-rose-500 dark:text-rose-500'>
@@ -526,7 +526,7 @@ const ERC1155 = (props: { seriesId: any }) => {
                   className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-400 focus:border-green-400  h-30 ${
                     errors.firstStampDesc && 'border-rose-500 '
                   }`}
-                  placeholder='이번 Series에 대한 자세한 내용을 기입해주세요.'
+                  placeholder=' 이 NFT에 대한 자세한 내용을 기입해주세요.'
                 />
                 {errors.firstStampDesc?.message ? (
                   <p className='text-sm leading-relaxed text-rose-500 dark:text-rose-500'>
@@ -583,7 +583,7 @@ const ERC1155 = (props: { seriesId: any }) => {
                   className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-400 focus:border-green-400  h-30 ${
                     errors.secondStampDesc && 'border-rose-500 '
                   }`}
-                  placeholder='이번 Series에 대한 자세한 내용을 기입해주세요.'
+                  placeholder='이 NFT에 대한 자세한 내용을 기입해주세요.'
                 />
                 {errors.secondStampDesc?.message ? (
                   <p className='text-sm leading-relaxed text-rose-500 dark:text-rose-500'>
@@ -640,7 +640,7 @@ const ERC1155 = (props: { seriesId: any }) => {
                   className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-400 focus:border-green-400  h-30 ${
                     errors.thirdStampDesc && 'border-rose-500 '
                   }`}
-                  placeholder='이번 Series에 대한 자세한 내용을 기입해주세요.'
+                  placeholder='이 NFT에 대한 자세한 내용을 기입해주세요.'
                 />
                 {errors.thirdStampDesc?.message ? (
                   <p className='text-sm leading-relaxed text-rose-500 dark:text-rose-500'>
@@ -697,7 +697,7 @@ const ERC1155 = (props: { seriesId: any }) => {
                   className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-400 focus:border-green-400  h-30 ${
                     errors.fourthStampDesc && 'border-rose-500 '
                   }`}
-                  placeholder='이번 Series에 대한 자세한 내용을 기입해주세요.'
+                  placeholder='이 NFT에 대한 자세한 내용을 기입해주세요.'
                 />
                 {errors.fourthStampDesc?.message ? (
                   <p className='text-sm leading-relaxed text-rose-500 dark:text-rose-500'>
