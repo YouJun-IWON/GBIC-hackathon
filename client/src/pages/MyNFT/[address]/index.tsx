@@ -46,25 +46,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 const Profile = (props: { transaction: any }) => {
-
-
   const profile = props.transaction;
-
-
-
 
   const userNFTData = profile.userInfo.type0;
   const userDNFTData1 = profile.userInfo.type1;
   const userDNFTData2 = profile.userInfo.type2;
-  
 
   const profileData = profile.userInfo.user;
 
-  const nftCount = userNFTData.length + userDNFTData1.length + userDNFTData2.length
-
- 
-
- 
+  const nftCount =
+    userNFTData.length + userDNFTData1.length + userDNFTData2.length;
 
   //! offcanvas
   // const [isOpen, setIsOpen] = useState(false);
@@ -118,9 +109,7 @@ const Profile = (props: { transaction: any }) => {
               <div className='w-full px-4 lg:order-1 lg:w-4/12 text-lg'>
                 <div className='flex justify-center py-4 pt-8 lg:pt-4'>
                   <div className='flex flex-col mr-4 p-3 text-center'>
-                    <span className='font-bold uppercase'>
-                      {nftCount}
-                    </span>
+                    <span className='font-bold uppercase'>{nftCount}</span>
                     <span className='font-normal text-gray-500'>
                       참여한 시리즈 수
                     </span>
@@ -380,40 +369,47 @@ const Profile = (props: { transaction: any }) => {
                       onPress={() => console.log('item pressed')}
                     >
                       <CardBody className='overflow-visible p-0'>
-                        {
-                          item.data[1].image ?  <Image
-                          width={400}
-                          height={400}
-                          alt='NextUI hero Image'
-                          src={item.data[1].image}
-                          className='min-w-[400px]'
-                        /> :  item.data[2].image ? <Image
-                        width={400}
-                        height={400}
-                        alt='NextUI hero Image'
-                        src={item.data[2].image}
-                        className='min-w-[400px]'
-                      /> : item.data[3].image ? <Image
-                      width={400}
-                      height={400}
-                      alt='NextUI hero Image'
-                      src={item.data[3].image}
-                      className='min-w-[400px]'
-                    /> :  item.data[4].image ? <Image
-                    width={400}
-                    height={400}
-                    alt='NextUI hero Image'
-                    src={item.data[4].image}
-                    className='min-w-[400px]'
-                  /> : <Image
-                  width={400}
-                  height={400}
-                  alt='NextUI hero Image'
-                  src={item.data[0].image}
-                  className='min-w-[400px]'
-                />
-                        }
-                       
+                        {item.data[1]?.image ? (
+                          <Image
+                            width={400}
+                            height={400}
+                            alt='NextUI hero Image'
+                            src={item.data[1].image}
+                            className='min-w-[400px]'
+                          />
+                        ) : item.data[2]?.image ? (
+                          <Image
+                            width={400}
+                            height={400}
+                            alt='NextUI hero Image'
+                            src={item.data[2].image}
+                            className='min-w-[400px]'
+                          />
+                        ) : item.data[3]?.image ? (
+                          <Image
+                            width={400}
+                            height={400}
+                            alt='NextUI hero Image'
+                            src={item.data[3].image}
+                            className='min-w-[400px]'
+                          />
+                        ) : item.data[4]?.image ? (
+                          <Image
+                            width={400}
+                            height={400}
+                            alt='NextUI hero Image'
+                            src={item.data[4].image}
+                            className='min-w-[400px]'
+                          />
+                        ) : (
+                          <Image
+                            width={400}
+                            height={400}
+                            alt='NextUI hero Image'
+                            src={item.data[0].image}
+                            className='min-w-[400px]'
+                          />
+                        )}
                       </CardBody>
                       <CardFooter className='text-md px-4 mx-auto'>
                         <div className=' px-4 mx-auto w-full '>
@@ -443,8 +439,6 @@ const Profile = (props: { transaction: any }) => {
                         </div>
                       </CardFooter>
                     </Card>
-
-                  
                   </div>
                 ))}
               </div>

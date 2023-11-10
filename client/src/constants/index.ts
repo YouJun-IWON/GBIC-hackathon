@@ -61,7 +61,7 @@ export const FEATURES = [
     icon: '/lendingPage/tech.svg',
     variant: 'orange',
     description:
-      '세계에서 가장 큰 NFT 거래소인 Opensea의 표준에 맞춘 NFT로서 Opensea에서 자신의 NFT를 확인할 수 있습니다. 그리고 Opensea를 포함한 NFT 마켓에서 자신이 갖고 있는 NFT를 팔거나 원하는 NFT를 구매할 수 있습니다. 만약 자신의 NFT가 인천시의 어떤 행사 티켓으로 사용될 수 있다면 그 가치는 훨씬 커질 수 있습니다.',
+      '세계에서 가장 큰 NFT 거래소인 Opensea의 표준에 맞춘 NFT로서 Opensea에서 자신의 NFT를 확인할 수 있습니다. 그리고 Opensea를 포함한 NFT 마켓에서 자신이 갖고 있는 NFT를 팔거나 원하는 NFT를 구매할 수 있습니다. 만약 자신의 NFT가 어떤 행사 티켓으로 사용될 수 있다면 그 가치는 훨씬 커질 수 있습니다.',
   },
 ];
 
